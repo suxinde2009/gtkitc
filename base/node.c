@@ -1,6 +1,5 @@
 #include "node.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 struct UNODE* CreateUNode()
 {

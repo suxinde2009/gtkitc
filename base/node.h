@@ -1,6 +1,8 @@
 #ifndef _NODE_
 #define _NODE_
 
+#include <stdlib.h>
+
  /* Payload is the data represented in the node. */
 
 /* An undirected node type. */

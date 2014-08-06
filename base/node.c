@@ -1,17 +1,25 @@
 #include "node.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-UNODE* CreateUNode()
+struct UNODE* CreateUNode()
 {
-      nde = (UNODE *) malloc(sizeof(UNODE));
+      struct UNODE* nde = (struct UNODE *) malloc(sizeof(struct UNODE));
 
       if(nde != NULL)
+      {
+          puts("Created UNODE.");
           return nde;
+      }
       else
           return NULL;
 }
 
-void DestroyUNode(UNODE* node)
+void DestroyUNode(struct UNODE* node)
 {
       if(node)
+      {
+          puts("Destroyed UNODE.");
           free(node);
+      }
 }

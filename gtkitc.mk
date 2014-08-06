@@ -8,8 +8,8 @@ GCCWALL = gcc -Wall
 
 .PHONY: cleanall cleanobj cleanexe
 
-all: $(BASE)node.c
-	$(GCCWALL) main.c -o gtkitc
+all:
+	$(GCCWALL) main.c $(BASE)node.c -o gtkitc
 
 # Phonies
 cleanall:

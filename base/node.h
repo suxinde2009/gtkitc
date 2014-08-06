@@ -1,4 +1,4 @@
-#ifdef _NODE_
+#ifndef _NODE_
 #define _NODE_
 
  /* Payload is the data represented in the node. */
@@ -7,18 +7,18 @@
 struct UNODE
 {
         void* payload;
-        UNODE* next;
+        struct UNODE* next;
 };
 
 /* A directed node type. */
 struct DNODE
 {
         void* payload;
-        DNODE* prev;
-        DNODE* next;
+        struct DNODE* prev;
+        struct DNODE* next;
 };
 
-UNODE* CreateUNode();
-void DestroyUNode(UNODE* node);
+struct UNODE* CreateUNode();
+void DestroyUNode(struct UNODE* node);
 
 #endif

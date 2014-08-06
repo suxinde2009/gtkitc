@@ -4,15 +4,19 @@
 # Aliases
 BASE = ./base/
 RMF = rm -f
+GCCWALL = gcc -Wall
 
 .PHONY: cleanall cleanobj cleanexe
 
+all: $(BASE)node.c
+	$(GCCWALL) main.c -o gtkitc
+
 # Phonies
 cleanall:
-  $(RMF) gtkitc *.o
+	$(RMF) gtkitc *.o *~
 
 cleanobj:
-  $(RMF) gtkitc.o
+	$(RMF) gtkitc.o
 
 cleanexe:
-  $(RMF) gtkitc
+	$(RMF) gtkitc

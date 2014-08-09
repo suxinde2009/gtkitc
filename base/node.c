@@ -7,7 +7,9 @@ unode* CreateRootUNode()
 
       if(nde != NULL)
       {
-          //
+
+          /* Root node points to inself. */
+          nde->next = nde;
 
           puts("Created UNODE.");
           return nde;

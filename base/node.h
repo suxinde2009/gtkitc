@@ -9,15 +9,15 @@
 typedef struct _UNODE
 {
         void* payload;
-        struct unode* next;
+        struct _UNODE* next;
 } unode;
 
 /* A directed node type. */
 typedef struct _DNODE
 {
         void* payload;
-        struct dnode* prev;
-        struct dnode* next;
+        struct _DNODE* prev;
+        struct _DNODE* next;
 } dnode;
 
 unode* CreateRootUNode();

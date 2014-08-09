@@ -6,21 +6,21 @@
  /* Payload is the data represented in the node. */
 
 /* An undirected node type. */
-struct UNODE
+struct _UNODE
 {
         void* payload;
-        struct UNODE* next;
+        struct _UNODE* next;
 };
 
 /* A directed node type. */
-struct DNODE
+struct _DNODE
 {
         void* payload;
-        struct DNODE* prev;
-        struct DNODE* next;
+        struct _DNODE* prev;
+        struct _DNODE* next;
 };
 
-struct UNODE* CreateUNode();
-void DestroyUNode(struct UNODE* node);
+struct _UNODE* CreateRootUNode();
+void DestroyUNode(struct _UNODE* node);
 
 #endif

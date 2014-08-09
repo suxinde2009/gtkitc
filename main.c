@@ -4,13 +4,14 @@
 int main()
 {
 
-      struct UNODE* un;
-      un = CreateUNode();
+      struct _UNODE* un;
+      un = CreateRootUNode();
 
-      un->payload = (int *) malloc(sizeof(int));
-      un->payload = (int *)1;
+      int testint = 13;
 
-      printf("In payload is: %d\n", un->payload);
+      un->payload = &testint;
+
+      printf("In payload is: %d\n", *((int*)un->payload));
 
       DestroyUNode(un);
 

@@ -1,9 +1,9 @@
 #include "node.h"
 #include <stdio.h>
 
-struct UNODE* CreateUNode()
+struct _UNODE* CreateRootUNode()
 {
-      struct UNODE* nde = (struct UNODE *) malloc(sizeof(struct UNODE));
+      struct _UNODE* nde = (struct _UNODE *) malloc(sizeof(struct _UNODE));
 
       if(nde != NULL)
       {
@@ -14,7 +14,7 @@ struct UNODE* CreateUNode()
           return NULL;
 }
 
-void DestroyUNode(struct UNODE* node)
+void DestroyUNode(struct _UNODE* node)
 {
       if(node)
       {

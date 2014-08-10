@@ -4,7 +4,7 @@
 int main()
 {
 
-      struct _UNODE* un;
+      unode* un;
       un = CreateRootUNode();
 
       int testint = 13;

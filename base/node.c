@@ -26,3 +26,18 @@ void DestroyUNode(unode* node)
           free(node);
       }
 }
+
+unode* AppendUnode(unode* rootNode, unode* newNode)
+{
+      return NULL;
+}
+
+unode* RemoveEndUnode(unode* rootNode)
+{
+      return NULL;
+}
+
+void ListUnodes(unode* rootNode)
+{
+
+}

@@ -22,8 +22,38 @@ void DestroyUNodeList(unode* node)
 {
       if(node)
       {
-          puts("Destroyed UNODE.");
-          free(node);
+          if(node->next == node)
+          {
+                puts("Deleted single node.");
+                free(node);
+                return;
+          }
+          else
+          {
+                unode* temp = node->next;
+
+                free(node);
+
+                do
+                {
+                        if(temp->next == temp)
+                        {
+                            puts("Deleting final node.");
+                            free(temp);
+                            return;
+                        }
+
+                        puts("Deleting intermediate node.");
+
+                        unode* toDelete = temp;
+                        temp = temp->next;
+
+                        free(toDelete);
+                }
+                while(1);
+
+                free(temp);
+          }
       }
 }
 

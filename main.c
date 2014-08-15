@@ -16,7 +16,7 @@ int main()
 
       ListUnodes(un);
 
-      DestroyUNode(un);
+      DestroyUNodeList(un);
 
       return 0;
 }

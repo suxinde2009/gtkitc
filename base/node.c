@@ -18,7 +18,7 @@ unode* CreateRootUNode()
           return NULL;
 }
 
-void DestroyUNode(unode* node)
+void DestroyUNodeList(unode* node)
 {
       if(node)
       {
@@ -30,29 +30,29 @@ void DestroyUNode(unode* node)
 void AppendUnode(unode* rootNode, unode* newNode)
 {
 
-      // Is the root node provided pointing to itself?
+      /* Is the root node provided pointing to itself? */
       if(rootNode->next == rootNode)
       {
-            // We are at the end, so add node.
+            /* We are at the end, so add node. */
             rootNode->next = newNode;
       }
       else
       {
-            // We are not at the last node, so find it
-            // and append.
+            /* We are not at the last node, so find it */
+            /* and append. */
             unode* tempNode = rootNode;
 
-            // Traverse along the nodes until last is found.
+            /* Traverse along the nodes until last is found. */
             while(tempNode->next != tempNode)
             {
                   tempNode = tempNode->next;
             }
 
-            // Last node found, move to the next.
+            /* Last node found, move to the next. */
             tempNode->next = newNode;
       }
 
-      // Ensure new node points to itself.
+      /* Ensure new node points to itself. */
       newNode->next = newNode;
 }
 

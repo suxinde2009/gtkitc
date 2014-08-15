@@ -21,7 +21,7 @@ typedef struct _DNODE
 } dnode;
 
 unode* CreateRootUNode();
-void DestroyUNode(unode* node);
+void DestroyUNodeList(unode* node);
 
 void AppendUnode(unode* rootNode, unode* newNode);
 unode* RemoveEndUnode(unode* rootNode);

@@ -8,13 +8,16 @@ int main()
 
       un = CreateRootUNode();
 
-      const char* testchar[] = {"13", "14", "15"};
+      const char* testchar[] = {"13", "14"};
 
       un->payload = (char *)testchar[0];
 
       AppendUnode(un, CreateRootUNode());
 
-      printf("In payload is: %s\n", (char*)un->payload);
+      un->next->payload = (char *)testchar[1];
+
+      printf("In root payload is: %s\n", (char*)un->payload);
+      printf("In next payload is: %s\n", (char*)un->next->payload);
 
       ListUnodes(un);
 

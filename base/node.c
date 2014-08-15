@@ -64,6 +64,7 @@ void AppendUnode(unode* rootNode, unode* newNode)
       if(rootNode->next == rootNode)
       {
             /* We are at the end, so add node. */
+            puts("Adding node...");
             rootNode->next = newNode;
       }
       else
@@ -93,7 +94,7 @@ unode* RemoveEndUnode(unode* rootNode)
 
 void ListUnodes(unode* rootNode)
 {
-      puts("Listing nodes...");
+      puts("\nListing nodes...");
 
       if(rootNode == NULL)
       {
@@ -102,6 +103,18 @@ void ListUnodes(unode* rootNode)
       }
 
       printf("%s -> ", (char *)rootNode->payload);
+
+      unode* nextNode = rootNode->next;
+
+      while(1)
+      {
+            printf("%s -> ", (char *)nextNode->payload);
+
+            if(nextNode == nextNode->next)
+                  break;
+
+            nextNode = nextNode->next;
+      }
 
       puts("o\n");
 }

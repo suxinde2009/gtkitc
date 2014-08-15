@@ -4,14 +4,17 @@
 int main()
 {
 
-      unode* un;
+      unode* un = NULL;
+
       un = CreateRootUNode();
 
-      int testint = 13;
+      const char* testchar = "13";
 
-      un->payload = &testint;
+      un->payload = (char *)testchar;
 
-      printf("In payload is: %d\n", *((int*)un->payload));
+      printf("In payload is: %s\n", (char*)un->payload);
+
+      ListUnodes(un);
 
       DestroyUNode(un);
 

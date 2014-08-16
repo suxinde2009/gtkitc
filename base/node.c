@@ -87,18 +87,29 @@ void ListUnodes(unode* rootNode)
             return;
       }
 
-      printf("%s -> ", (char *)rootNode->payload);
-
-      nextNode = rootNode->next;
-
-      while(1)
+      if(rootNode == rootNode->next)
       {
-            printf("%s -> ", (char *)nextNode->payload);
+            printf("%s -> ", (char *)rootNode->payload);
+      }
+      else
+      {
 
-            if(nextNode == nextNode->next)
-                  break;
+            printf("%s -> ", (char *)rootNode->payload);
 
-            nextNode = nextNode->next;
+            nextNode = rootNode->next;
+
+            while(1)
+            {
+                  if(nextNode == nextNode->next)
+                  {
+                        printf("%s -> ", (char *)nextNode->payload);
+                        break;
+                  }
+                  else
+                        printf("%s -> ", (char *)nextNode->payload);
+
+                  nextNode = nextNode->next;
+            }
       }
 
       puts("o\n");

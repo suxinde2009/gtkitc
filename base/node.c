@@ -22,38 +22,20 @@ void DestroyUNodeList(unode* node)
 {
       if(node)
       {
-          if(node->next == node)
-          {
-                puts("Deleted single node.");
-                free(node);
-                return;
-          }
-          else
-          {
-                unode* temp = node->next;
+            if(node->next == node)
+            {
+                  puts("Deleted single node.");
+                  free(node);
+                  return;
+            }
+/*
+            while(1)
+            {
+                  unode
 
-                free(node);
-
-                do
-                {
-                        if(temp->next == temp)
-                        {
-                            puts("Deleting final node.");
-                            free(temp);
-                            return;
-                        }
-
-                        puts("Deleting intermediate node.");
-
-                        unode* toDelete = temp;
-                        temp = temp->next;
-
-                        free(toDelete);
-                }
-                while(1);
-
-                free(temp);
-          }
+                  if
+            }
+*/
       }
 }
 
@@ -94,6 +76,9 @@ unode* RemoveEndUnode(unode* rootNode)
 
 void ListUnodes(unode* rootNode)
 {
+
+      unode* nextNode;
+
       puts("\nListing nodes...");
 
       if(rootNode == NULL)
@@ -104,7 +89,7 @@ void ListUnodes(unode* rootNode)
 
       printf("%s -> ", (char *)rootNode->payload);
 
-      unode* nextNode = rootNode->next;
+      nextNode = rootNode->next;
 
       while(1)
       {

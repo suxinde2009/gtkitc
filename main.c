@@ -4,11 +4,10 @@
 int main()
 {
 
+      const char* testchar[] = {"13", "14"};
       unode* un = NULL;
 
       un = CreateRootUNode();
-
-      const char* testchar[] = {"13", "14"};
 
       un->payload = (char *)testchar[0];
 

@@ -1,5 +1,5 @@
-#ifndef _NODE_
-#define _NODE_
+#ifndef _SINGLY_LINKED_LIST_
+#define _SINGLY_LINKED_LIST_
 
 #include <stdlib.h>
 
@@ -11,14 +11,6 @@ typedef struct _UNODE
         void* payload;
         struct _UNODE* next;
 } unode;
-
-/* A directed node type. */
-typedef struct _DNODE
-{
-        void* payload;
-        struct _DNODE* prev;
-        struct _DNODE* next;
-} dnode;
 
 unode* CreateRootUNode();
 void DestroyUNodeList(unode* node);

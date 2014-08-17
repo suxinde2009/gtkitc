@@ -37,11 +37,41 @@ void DestroyUNodeList(unode* rootNode)
             nextNode[0] = rootNode->next;
             nextNode[1] = nextNode[0]->next;
 
+            printf("Node [%s]\n", (char *)rootNode->payload);
+            printf("Node [%s]\n", (char *)nextNode[0]->payload);
+            printf("Node [%s]\n", (char *)nextNode[1]->payload);
+
             free(rootNode);
 
             while(1)
             {
-                  break;
+
+                  if(nextNode[0] == nextNode[0]->next)
+                  {
+                        printf("Deleting final node [%s]\n", (char *)nextNode[0]->payload);
+                        free(nextNode[0]);
+                        break;
+                  }
+                  else
+                  {
+                      printf("Deleting intermediate node [%s]\n", (char *)nextNode[0]->payload);
+                      nextNode[1] = nextNode[0]->next;
+                      free(nextNode[0]);
+                  }
+
+                  if(nextNode[1] == nextNode[1]->next)
+                  {
+                        printf("Deleting final node [%s]\n", (char *)nextNode[1]->payload);
+                        free(nextNode[1]);
+                        break;
+                  }
+                  else
+                  {
+                        printf("Deleting intermediate node [%s]\n", (char *)nextNode[1]->payload);
+                        nextNode[0] = nextNode[1]->next;
+                        free(nextNode[1]);
+                  }
+
             }
 
       }

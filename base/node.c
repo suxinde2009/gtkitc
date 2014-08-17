@@ -18,24 +18,32 @@ unode* CreateRootUNode()
           return NULL;
 }
 
-void DestroyUNodeList(unode* node)
+void DestroyUNodeList(unode* rootNode)
 {
-      if(node)
+
+      unode* nextNode[2];
+
+      if(rootNode != NULL)
       {
-            if(node->next == node)
+            if(rootNode->next == rootNode)
             {
                   puts("Deleted single node.");
-                  free(node);
+                  free(rootNode);
                   return;
             }
-/*
+
+            puts("Removing list of nodes.");
+
+            nextNode[0] = rootNode->next;
+            nextNode[1] = nextNode[0]->next;
+
+            free(rootNode);
+
             while(1)
             {
-                  unode
-
-                  if
+                  break;
             }
-*/
+
       }
 }
 
@@ -66,6 +74,7 @@ void AppendUnode(unode* rootNode, unode* newNode)
       }
 
       /* Ensure new node points to itself. */
+      puts("Added intermediate node.");
       newNode->next = newNode;
 }
 

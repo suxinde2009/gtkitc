@@ -1,6 +1,26 @@
 #include <stdio.h>
 #include "sll.h"
 
+static int FreeUNode(unode* cur, unode* next)
+{
+
+      if(cur == cur->next)
+      {
+            printf("Deleting final node [%s]\n", (char *)cur->payload);
+            free(cur);
+            return 1;
+      }
+      else
+      {
+          printf("Deleting intermediate node [%s]\n", (char *)cur->payload);
+          next = cur->next;
+          free(cur);
+      }
+
+      return 0;
+
+}
+
 unode* CreateRootUNode()
 {
       unode* nde = (unode *) malloc(sizeof(unode));
@@ -45,33 +65,11 @@ void DestroyUNodeList(unode* rootNode)
 
             while(1)
             {
-
-                  if(nextNode[0] == nextNode[0]->next)
-                  {
-                        printf("Deleting final node [%s]\n", (char *)nextNode[0]->payload);
-                        free(nextNode[0]);
+                  if(FreeUNode(nextNode[0], nextNode[1]))
                         break;
-                  }
-                  else
-                  {
-                      printf("Deleting intermediate node [%s]\n", (char *)nextNode[0]->payload);
-                      nextNode[1] = nextNode[0]->next;
-                      free(nextNode[0]);
-                  }
 
-                  if(nextNode[1] == nextNode[1]->next)
-                  {
-                        printf("Deleting final node [%s]\n", (char *)nextNode[1]->payload);
-                        free(nextNode[1]);
+                  if(FreeUNode(nextNode[1], nextNode[0]))
                         break;
-                  }
-                  else
-                  {
-                        printf("Deleting intermediate node [%s]\n", (char *)nextNode[1]->payload);
-                        nextNode[0] = nextNode[1]->next;
-                        free(nextNode[1]);
-                  }
-
             }
 
       }

@@ -55,12 +55,8 @@ void DestroyUNodeList(unode* rootNode)
             puts("Removing list of nodes.");
 
             nextNode[0] = rootNode->next;
-            nextNode[1] = nextNode[0]->next;
 
-            printf("Node [%s]\n", (char *)rootNode->payload);
-            printf("Node [%s]\n", (char *)nextNode[0]->payload);
-            printf("Node [%s]\n", (char *)nextNode[1]->payload);
-
+            printf("Removing root node [%s]\n", (char *)rootNode->payload);
             free(rootNode);
 
             while(1)

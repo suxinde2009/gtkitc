@@ -4,7 +4,7 @@
 # Aliases
 BASE = ./base/
 RMF = rm -f
-GCCWALL = gcc -Wall
+GCCWALL = gcc -g -Wall
 
 .PHONY: cleanall cleanobj cleanexe
 

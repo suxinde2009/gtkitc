@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include "sll.h"
 
 static int FreeUNode(unode* cur, unode* next)
@@ -102,9 +103,29 @@ void AppendUnode(unode* rootNode, unode* newNode)
       newNode->next = newNode;
 }
 
-unode* RemoveEndUnode(unode* rootNode)
+int RemoveNthUnode(unode* rootNode, unsigned int nodeSeq)
 {
-      return NULL;
+      unsigned int count = 0;
+      unode* currentNode;
+      unode* lastNode;
+
+      currentNode = rootNode;
+      lastNode = currentNode;
+
+      while(1)
+      {
+            if(count == nodeSeq)
+            {
+                  /* Removing node */
+
+
+                  break;
+            }
+
+            count++;
+      }
+
+      return 0;
 }
 
 void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *))

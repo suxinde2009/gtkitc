@@ -18,6 +18,6 @@ void DestroyUNodeList(unode* node);
 void AppendUnode(unode* rootNode, unode* newNode);
 unode* RemoveEndUnode(unode* rootNode);
 
-void ListUnodes(unode* rootNode);
+void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *));
 
 #endif

@@ -107,7 +107,7 @@ unode* RemoveEndUnode(unode* rootNode)
       return NULL;
 }
 
-void ListUnodes(unode* rootNode)
+void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *))
 {
 
       unode* nextNode;
@@ -122,12 +122,12 @@ void ListUnodes(unode* rootNode)
 
       if(rootNode == rootNode->next)
       {
-            printf("%s -> ", (char *)rootNode->payload);
+            payloaddisplay(rootNode);
       }
       else
       {
 
-            printf("%s -> ", (char *)rootNode->payload);
+            payloaddisplay(rootNode);
 
             nextNode = rootNode->next;
 
@@ -135,11 +135,11 @@ void ListUnodes(unode* rootNode)
             {
                   if(nextNode == nextNode->next)
                   {
-                        printf("%s -> ", (char *)nextNode->payload);
+                        payloaddisplay(nextNode);
                         break;
                   }
                   else
-                        printf("%s -> ", (char *)nextNode->payload);
+                        payloaddisplay(nextNode);
 
                   nextNode = nextNode->next;
             }

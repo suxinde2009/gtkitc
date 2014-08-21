@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "./base/sll.h"
 
+void DisplayUNode(unode* inNode)
+{
+      printf("%s -> ", (char *)inNode->payload);
+}
+
 int main()
 {
 
@@ -21,7 +26,7 @@ int main()
       printf("In next payload is: %s\n", (char*)un->next->payload);
       printf("In next payload is: %s\n", (char*)un->next->next->payload);
 
-      ListUnodes(un);
+      ListUnodes(un, DisplayUNode);
 
       DestroyUNodeList(un);
 

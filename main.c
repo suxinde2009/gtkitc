@@ -22,6 +22,10 @@ int main()
       un->next->payload = (char *)testchar[1];
       un->next->next->payload = (char *)testchar[2];
 
+      ListUnodes(un, DisplayUNode);
+
+      RemoveNthUnode(un, 1);
+
       printf("In root payload is: %s\n", (char*)un->payload);
       printf("In next payload is: %s\n", (char*)un->next->payload);
       printf("In next payload is: %s\n", (char*)un->next->next->payload);

@@ -13,9 +13,9 @@ static int FreeUNode(unode* cur, unode* next)
       }
       else
       {
-          printf("Deleting intermediate node [%s]\n", (char *)cur->payload);
-          next = cur->next;
-          free(cur);
+            printf("Deleting intermediate node [%s]\n", (char *)cur->payload);
+            next = cur->next;
+            free(cur);
       }
 
       return 0;
@@ -105,25 +105,14 @@ void AppendUnode(unode* rootNode, unode* newNode)
 
 int RemoveNthUnode(unode* rootNode, unsigned int nodeSeq)
 {
-      unsigned int count = 0;
+  /*    unsigned int count = 0;
       unode* currentNode;
-      unode* lastNode;
+      unode* prevNode;
 
       currentNode = rootNode;
-      lastNode = currentNode;
+      prevNode = currentNode;*/
 
-      while(1)
-      {
-            if(count == nodeSeq)
-            {
-                  /* Removing node */
-
-
-                  break;
-            }
-
-            count++;
-      }
+      puts("Doing something.");
 
       return 0;
 }

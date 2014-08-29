@@ -103,40 +103,6 @@ void AppendUnode(unode* rootNode, unode* newNode)
       newNode->next = newNode;
 }
 
-int RemoveNthUnode(unode* rootNode, unsigned int nodeSeq)
-{
-      unode* nextNode[2];
-
-      puts("\nRemoving nth node");
-
-      /* Remove root node */
-      if(nodeSeq == 0)
-      {
-            puts("\nRemoving root as nth");
-
-            nextNode[0] = rootNode;
-
-            while(1)
-            {
-                  nextNode[1] = nextNode[0]->next;
-
-                  if(nextNode[1] == nextNode[1]->next)
-                  {
-                        free(nextNode[1]);
-                        nextNode[0] = nextNode[0]->next;
-                        break;
-                  }
-
-                  nextNode[0] = nextNode[1]->next;
-
-            }
-
-            return 1;
-      }
-
-      return 0;
-}
-
 void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *))
 {
 

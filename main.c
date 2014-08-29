@@ -24,15 +24,17 @@ int main()
 
       ListUnodes(un, DisplayUNode);
 
-      RemoveNthUnode(un, 1);
-
+      RemoveNthUnode(un, 0);
+/*
       printf("In root payload is: %s\n", (char*)un->payload);
       printf("In next payload is: %s\n", (char*)un->next->payload);
       printf("In next payload is: %s\n", (char*)un->next->next->payload);
-
+*/
       ListUnodes(un, DisplayUNode);
 
       DestroyUNodeList(un);
+
+      ListUnodes(un, DisplayUNode);
 
       return 0;
 }

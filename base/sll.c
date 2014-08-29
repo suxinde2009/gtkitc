@@ -105,14 +105,34 @@ void AppendUnode(unode* rootNode, unode* newNode)
 
 int RemoveNthUnode(unode* rootNode, unsigned int nodeSeq)
 {
-  /*    unsigned int count = 0;
-      unode* currentNode;
-      unode* prevNode;
+      unode* nextNode[2];
 
-      currentNode = rootNode;
-      prevNode = currentNode;*/
+      puts("\nRemoving nth node");
 
-      puts("Doing something.");
+      /* Remove root node */
+      if(nodeSeq == 0)
+      {
+            puts("\nRemoving root as nth");
+
+            nextNode[0] = rootNode;
+
+            while(1)
+            {
+                  nextNode[1] = nextNode[0]->next;
+
+                  if(nextNode[1] == nextNode[1]->next)
+                  {
+                        free(nextNode[1]);
+                        nextNode[0] = nextNode[0]->next;
+                        break;
+                  }
+
+                  nextNode[0] = nextNode[1]->next;
+
+            }
+
+            return 1;
+      }
 
       return 0;
 }

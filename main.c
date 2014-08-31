@@ -11,22 +11,23 @@ int main()
 
       const char* testchar[] = {"13", "14", "15"};
       unode* un = NULL;
+      unode* curNode = NULL;
 
       un = CreateRootUNode();
 
-      un->payload = (char *)testchar[0];
-
       AppendUnode(un, CreateRootUNode());
       AppendUnode(un, CreateRootUNode());
 
-      un->next->payload = (char *)testchar[1];
-      un->next->next->payload = (char *)testchar[2];
-
-      ListUnodes(un, DisplayUNode);
-
-      printf("In root payload is: %s\n", (char*)un->payload);
-      printf("In next payload is: %s\n", (char*)un->next->payload);
-      printf("In next payload is: %s\n", (char*)un->next->next->payload);
+      curNode = un;
+      curNode->payload = (char *)testchar[0];
+      printf("In root payload is: %s\n", (char*)curNode->payload);
+      curNode = curNode->next;
+      curNode->payload = (char *)testchar[1];
+      printf("In next payload is: %s\n", (char*)curNode->payload);
+      curNode = curNode->next;
+      curNode->payload = (char *)testchar[2];
+      printf("In last payload is: %s\n", (char*)curNode->payload);
+      curNode = NULL;
 
       ListUnodes(un, DisplayUNode);
 

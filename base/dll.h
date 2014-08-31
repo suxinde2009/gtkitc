@@ -9,7 +9,7 @@ typedef struct _DNODE
         struct _DNODE* next;
 } dnode;
 
-dnode* CreateRootDNode();
+dnode* CreateDNode();
 void DestroyDNodeList(dnode* node);
 void AppendDNode(dnode* rootNode, dnode* newNode);
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *));

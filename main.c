@@ -9,26 +9,28 @@ void DisplaySNode(snode* inNode)
 int main()
 {
 
-      const char* testchar[] = {"13", "14", "15"};
-
-      /* Singly linked list examples. */
+      const char* testdata[] = {"13", "14", "15"};
 
       snode* un = NULL;
       snode* curNode = NULL;
 
-      un = CreateRootSNode();
+      /* Singly linked list examples. */
 
-      AppendSNode(un, CreateRootSNode());
-      AppendSNode(un, CreateRootSNode());
+      puts("Singly linked list run...\n");
+
+      un = CreateSNode();
+
+      AppendSNode(un, CreateSNode());
+      AppendSNode(un, CreateSNode());
 
       curNode = un;
-      curNode->payload = (char *)testchar[0];
+      curNode->payload = (char *)testdata[0];
       printf("In root payload is: %s\n", (char*)curNode->payload);
       curNode = curNode->next;
-      curNode->payload = (char *)testchar[1];
+      curNode->payload = (char *)testdata[1];
       printf("In next payload is: %s\n", (char*)curNode->payload);
       curNode = curNode->next;
-      curNode->payload = (char *)testchar[2];
+      curNode->payload = (char *)testdata[2];
       printf("In last payload is: %s\n", (char*)curNode->payload);
       curNode = NULL;
 
@@ -39,6 +41,8 @@ int main()
       ListSNodes(un, DisplaySNode);
 
       /* Doubly linked list examples. */
+
+      puts("Doubly linked list run...\n");
 
       return 0;
 }

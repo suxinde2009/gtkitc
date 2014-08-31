@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <limits.h>
+#include <stdlib.h>
 #include "sll.h"
 
 static int FreeSNode(snode* cur, snode* next)
@@ -7,13 +7,13 @@ static int FreeSNode(snode* cur, snode* next)
 
       if(cur == cur->next)
       {
-            printf("Deleting final node [%s]\n", (char *)cur->payload);
+            printf("Deleting final SLL node [%s]\n", (char *)cur->payload);
             free(cur);
             return 1;
       }
       else
       {
-            printf("Deleting intermediate node [%s]\n", (char *)cur->payload);
+            printf("Deleting intermediate SLL node [%s]\n", (char *)cur->payload);
             next = cur->next;
             free(cur);
       }
@@ -22,17 +22,17 @@ static int FreeSNode(snode* cur, snode* next)
 
 }
 
-snode* CreateRootSNode()
+snode* CreateSNode()
 {
       snode* nde = (snode *) malloc(sizeof(snode));
 
       if(nde != NULL)
       {
 
-          /* Root node points to inself. */
+          /* Node points to inself. */
           nde->next = nde;
 
-          puts("Created UNODE.");
+          puts("Created SLL node.");
           return nde;
       }
       else
@@ -48,16 +48,16 @@ void DestroySNodeList(snode* rootNode)
       {
             if(rootNode->next == rootNode)
             {
-                  puts("Deleted single node.");
+                  puts("Deleted single SLL node.");
                   free(rootNode);
                   return;
             }
 
-            puts("Removing list of nodes.");
+            puts("Removing list of SLL nodes.");
 
             nextNode[0] = rootNode->next;
 
-            printf("Removing root node [%s]\n", (char *)rootNode->payload);
+            printf("Removing root SLL node [%s]\n", (char *)rootNode->payload);
             free(rootNode);
 
             while(1)
@@ -79,7 +79,7 @@ void AppendSNode(snode* rootNode, snode* newNode)
       if(rootNode->next == rootNode)
       {
             /* We are at the end, so add node. */
-            puts("Adding node...");
+            puts("Adding SLL node...");
             rootNode->next = newNode;
       }
       else
@@ -99,7 +99,7 @@ void AppendSNode(snode* rootNode, snode* newNode)
       }
 
       /* Ensure new node points to itself. */
-      puts("Added intermediate node.");
+      puts("Added intermediate SLL node.");
       newNode->next = newNode;
 }
 
@@ -108,7 +108,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 
       snode* nextNode;
 
-      puts("\nListing nodes...");
+      puts("\nListing SLL nodes...");
 
       if(rootNode == NULL)
       {

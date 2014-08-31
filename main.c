@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "./base/sll.h"
 
-void DisplayUNode(unode* inNode)
+void DisplaySNode(snode* inNode)
 {
       printf("%s -> ", (char *)inNode->payload);
 }
@@ -10,13 +10,16 @@ int main()
 {
 
       const char* testchar[] = {"13", "14", "15"};
-      unode* un = NULL;
-      unode* curNode = NULL;
 
-      un = CreateRootUNode();
+      /* Singly linked list examples. */
 
-      AppendUnode(un, CreateRootUNode());
-      AppendUnode(un, CreateRootUNode());
+      snode* un = NULL;
+      snode* curNode = NULL;
+
+      un = CreateRootSNode();
+
+      AppendSNode(un, CreateRootSNode());
+      AppendSNode(un, CreateRootSNode());
 
       curNode = un;
       curNode->payload = (char *)testchar[0];
@@ -29,11 +32,13 @@ int main()
       printf("In last payload is: %s\n", (char*)curNode->payload);
       curNode = NULL;
 
-      ListUnodes(un, DisplayUNode);
+      ListSNodes(un, DisplaySNode);
 
-      DestroyUNodeList(un);
+      DestroySNodeList(un);
 
-      ListUnodes(un, DisplayUNode);
+      ListSNodes(un, DisplaySNode);
+
+      /* Doubly linked list examples. */
 
       return 0;
 }

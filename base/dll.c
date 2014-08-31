@@ -1,2 +1,22 @@
-#include "node.h"
 #include <stdio.h>
+#include "node.h"
+
+dnode* CreateRootDNode()
+{
+        return NULL;
+}
+
+void DestroyDNodeList(dnode* node);
+{
+
+}
+
+void AppendDNode(dnode* rootNode, dnode* newNode)
+{
+
+}
+
+void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
+{
+
+}

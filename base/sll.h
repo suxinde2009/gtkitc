@@ -6,17 +6,15 @@
  /* Payload is the data represented in the node. */
 
 /* An undirected node type. */
-typedef struct _UNODE
+typedef struct _SNODE
 {
         void* payload;
-        struct _UNODE* next;
-} unode;
+        struct _SNODE* next;
+} snode;
 
-unode* CreateRootUNode();
-void DestroyUNodeList(unode* node);
-
-void AppendUnode(unode* rootNode, unode* newNode);
-
-void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *));
+snode* CreateRootSNode();
+void DestroySNodeList(snode* node);
+void AppendSNode(snode* rootNode, snode* newNode);
+void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *));
 
 #endif

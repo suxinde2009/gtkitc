@@ -2,7 +2,7 @@
 #include <limits.h>
 #include "sll.h"
 
-static int FreeUNode(unode* cur, unode* next)
+static int FreeSNode(snode* cur, snode* next)
 {
 
       if(cur == cur->next)
@@ -22,9 +22,9 @@ static int FreeUNode(unode* cur, unode* next)
 
 }
 
-unode* CreateRootUNode()
+snode* CreateRootSNode()
 {
-      unode* nde = (unode *) malloc(sizeof(unode));
+      snode* nde = (snode *) malloc(sizeof(snode));
 
       if(nde != NULL)
       {
@@ -39,10 +39,10 @@ unode* CreateRootUNode()
           return NULL;
 }
 
-void DestroyUNodeList(unode* rootNode)
+void DestroySNodeList(snode* rootNode)
 {
 
-      unode* nextNode[2];
+      snode* nextNode[2];
 
       if(rootNode != NULL)
       {
@@ -62,17 +62,17 @@ void DestroyUNodeList(unode* rootNode)
 
             while(1)
             {
-                  if(FreeUNode(nextNode[0], nextNode[1]))
+                  if(FreeSNode(nextNode[0], nextNode[1]))
                         break;
 
-                  if(FreeUNode(nextNode[1], nextNode[0]))
+                  if(FreeSNode(nextNode[1], nextNode[0]))
                         break;
             }
 
       }
 }
 
-void AppendUnode(unode* rootNode, unode* newNode)
+void AppendSNode(snode* rootNode, snode* newNode)
 {
 
       /* Is the root node provided pointing to itself? */
@@ -86,7 +86,7 @@ void AppendUnode(unode* rootNode, unode* newNode)
       {
             /* We are not at the last node, so find it */
             /* and append. */
-            unode* tempNode = rootNode;
+            snode* tempNode = rootNode;
 
             /* Traverse along the nodes until last is found. */
             while(tempNode->next != tempNode)
@@ -103,16 +103,16 @@ void AppendUnode(unode* rootNode, unode* newNode)
       newNode->next = newNode;
 }
 
-void ListUnodes(unode* rootNode, void (*payloaddisplay)(unode *))
+void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 {
 
-      unode* nextNode;
+      snode* nextNode;
 
       puts("\nListing nodes...");
 
       if(rootNode == NULL)
       {
-            perror("Empty (NULL) unode list provided.");
+            perror("Empty (NULL) snode list provided.");
             return;
       }
 

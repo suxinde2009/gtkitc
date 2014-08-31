@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include "node.h"
+#include "dll.h"
 
 dnode* CreateRootDNode()
 {
         return NULL;
 }
 
-void DestroyDNodeList(dnode* node);
+void DestroyDNodeList(dnode* node)
 {
 
 }

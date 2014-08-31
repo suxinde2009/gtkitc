@@ -1,4 +1,4 @@
-# Builds gtkitc for demo purposes. Feel free to integrae into your own makefiles for your projects.
+# Builds gtkitc for demo purposes. Feel free to integrate into your own makefiles for your projects.
 # To build just do: make -f gtkitc.mk
 
 # Aliases
@@ -9,7 +9,7 @@ GCCWALL = gcc -g -Wall
 .PHONY: cleanall cleanobj cleanexe
 
 all:
-	$(GCCWALL) main.c $(BASE)sll.c -std=c89 -pedantic -o gtkitc
+	$(GCCWALL) main.c $(BASE)sll.c $(BASE)dll.c -std=c89 -pedantic -o gtkitc
 
 # Phonies
 cleanall:

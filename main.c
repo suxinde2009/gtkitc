@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include "./base/sll.h"
+#include "./base/dll.h"
 
-void DisplaySNode(snode* inNode)
+static void DisplaySNode(snode* inNode)
+{
+      printf("%s -> ", (char *)inNode->payload);
+}
+
+static void DisplayDNode(dnode* inNode)
 {
       printf("%s -> ", (char *)inNode->payload);
 }
@@ -12,7 +18,10 @@ int main()
       const char* testdata[] = {"13", "14", "15"};
 
       snode* un = NULL;
-      snode* curNode = NULL;
+      snode* curSNode = NULL;
+
+      dnode* dn = NULL;
+      dnode* curDNode = NULL;
 
       /* Singly linked list examples. */
 
@@ -23,16 +32,16 @@ int main()
       AppendSNode(un, CreateSNode());
       AppendSNode(un, CreateSNode());
 
-      curNode = un;
-      curNode->payload = (char *)testdata[0];
-      printf("In root payload is: %s\n", (char*)curNode->payload);
-      curNode = curNode->next;
-      curNode->payload = (char *)testdata[1];
-      printf("In next payload is: %s\n", (char*)curNode->payload);
-      curNode = curNode->next;
-      curNode->payload = (char *)testdata[2];
-      printf("In last payload is: %s\n", (char*)curNode->payload);
-      curNode = NULL;
+      curSNode = un;
+      curSNode->payload = (char *)testdata[0];
+      printf("In root payload is: %s\n", (char*)curSNode->payload);
+      curSNode = curSNode->next;
+      curSNode->payload = (char *)testdata[1];
+      printf("In next payload is: %s\n", (char*)curSNode->payload);
+      curSNode = curSNode->next;
+      curSNode->payload = (char *)testdata[2];
+      printf("In last payload is: %s\n", (char*)curSNode->payload);
+      curSNode = NULL;
 
       ListSNodes(un, DisplaySNode);
 
@@ -43,6 +52,28 @@ int main()
       /* Doubly linked list examples. */
 
       puts("Doubly linked list run...\n");
+
+      dn = CreateDNode();
+
+      AppendDNode(dn, CreateDNode());
+      AppendDNode(dn, CreateDNode());
+
+      curDNode = dn;
+      curDNode->payload = (char *)testdata[0];
+      printf("In root payload is: %s\n", (char*)curDNode->payload);
+      curDNode = curDNode->next;
+      curDNode->payload = (char *)testdata[1];
+      printf("In next payload is: %s\n", (char*)curDNode->payload);
+      curDNode = curDNode->next;
+      curDNode->payload = (char *)testdata[2];
+      printf("In last payload is: %s\n", (char*)curDNode->payload);
+      curDNode = NULL;
+
+      ListDNodes(dn, DisplayDNode);
+
+      DestroyDNodeList(dn);
+
+      ListDNodes(dn, DisplayDNode);
 
       return 0;
 }

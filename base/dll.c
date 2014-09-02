@@ -159,8 +159,14 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       if(lastNode->next == lastNode)
       {
             payloaddisplay(lastNode);
+            payloaddisplay(lastNode->prev);
+            payloaddisplay(lastNode->prev->prev);
+      }
+      else
+      {
+
       }
 
-      puts("\n");
+      puts("|\n");
 
 }

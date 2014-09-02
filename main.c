@@ -73,7 +73,5 @@ int main()
 
       DestroyDNodeList(dn);
 
-      ListDNodes(dn, DisplayDNode);
-
       return 0;
 }

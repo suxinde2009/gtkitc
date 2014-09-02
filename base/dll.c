@@ -75,14 +75,13 @@ void DestroyDNodeList(dnode* rootNode)
 void AppendDNode(dnode* rootNode, dnode* newNode)
 {
 
-      /* TODO: Do prev links. */
-
       /* Is the root node provided pointing to itself? */
       if(rootNode->next == rootNode)
       {
             /* We are at the end, so add node. */
             puts("Adding node...");
             rootNode->next = newNode;
+            newNode->prev = rootNode;
       }
       else
       {
@@ -98,6 +97,9 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
 
             /* Last node found, move to the next. */
             tempNode->next = newNode;
+
+            /* Set the previous node for the new node. */
+            newNode->prev = tempNode;
       }
 
       /* Ensure new node points to itself. */
@@ -111,8 +113,10 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       /* TODO: Also list in reverse order. */
 
       dnode* nextNode;
+      dnode* lastNode;
+      dnode* prevNode;
 
-      puts("\nListing DLL nodes...");
+      puts("\nListing DLL nodes (FORWARDS)...");
 
       if(rootNode == NULL)
       {
@@ -136,6 +140,7 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
                   if(nextNode == nextNode->next)
                   {
                         payloaddisplay(nextNode);
+                        lastNode = nextNode;
                         break;
                   }
                   else
@@ -146,4 +151,16 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       }
 
       puts("o\n");
+
+      puts("Listing DLL nodes (BACKWARDS)...");
+
+      printf("o -> ");
+
+      if(lastNode->next == lastNode)
+      {
+            payloaddisplay(lastNode);
+      }
+
+      puts("\n");
+
 }

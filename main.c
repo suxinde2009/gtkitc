@@ -23,7 +23,7 @@ int main()
       dnode* dn = NULL;
       dnode* curDNode = NULL;
 
-      /* Singly linked list examples. */
+      /* Singly linked list example. */
 
       puts("Singly linked list run...\n");
 
@@ -47,11 +47,9 @@ int main()
 
       DestroySNodeList(un);
 
-      ListSNodes(un, DisplaySNode);
+      /* Doubly linked list example. */
 
-      /* Doubly linked list examples. */
-
-      puts("Doubly linked list run...\n");
+      puts("\nDoubly linked list run...\n");
 
       dn = CreateDNode();
 
@@ -72,8 +70,6 @@ int main()
       ListDNodes(dn, DisplayDNode);
 
       DestroyDNodeList(dn);
-
-      ListDNodes(dn, DisplayDNode);
 
       return 0;
 }

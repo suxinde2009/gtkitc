@@ -9,7 +9,7 @@ static void DisplaySNode(snode* inNode)
 
 static void DisplayDNode(dnode* inNode)
 {
-      printf("%s -> ", (char *)inNode->payload);
+      printf("%s [%s] -> ", (char *)inNode->payload, (char *)inNode->prev->payload);
 }
 
 int main()
@@ -72,6 +72,8 @@ int main()
       ListDNodes(dn, DisplayDNode);
 
       DestroyDNodeList(dn);
+
+      ListDNodes(dn, DisplayDNode);
 
       return 0;
 }

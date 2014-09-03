@@ -113,10 +113,8 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       /* TODO: Also list in reverse order. */
 
       dnode* nextNode;
-      dnode* lastNode;
-      dnode* prevNode;
 
-      puts("\nListing DLL nodes (FORWARDS)...");
+      puts("\nListing DLL nodes (previous node payload in square brackets)...");
 
       if(rootNode == NULL)
       {
@@ -140,7 +138,6 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
                   if(nextNode == nextNode->next)
                   {
                         payloaddisplay(nextNode);
-                        lastNode = nextNode;
                         break;
                   }
                   else
@@ -151,22 +148,5 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       }
 
       puts("o\n");
-
-      puts("Listing DLL nodes (BACKWARDS)...");
-
-      printf("o -> ");
-
-      if(lastNode->next == lastNode)
-      {
-            payloaddisplay(lastNode);
-            payloaddisplay(lastNode->prev);
-            payloaddisplay(lastNode->prev->prev);
-      }
-      else
-      {
-
-      }
-
-      puts("|\n");
 
 }

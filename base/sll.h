@@ -6,8 +6,8 @@
 /* An undirected node type. */
 typedef struct _SNODE
 {
-        void* payload;
-        struct _SNODE* next;
+      void* payload;
+      struct _SNODE* next;
 } snode;
 
 snode* CreateSNode();

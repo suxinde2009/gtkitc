@@ -15,7 +15,7 @@ static void DisplayDNode(dnode* inNode)
 int main()
 {
 
-      const char* testdata[] = {"13", "14", "15"};
+      const char* testdata[] = {"Marleine", "Mary", "Butcher"};
 
       snode* un = NULL;
       snode* curSNode = NULL;

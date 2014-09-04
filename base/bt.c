@@ -16,7 +16,6 @@ btree* CreateLeafNode()
       else
       {
             puts("Failed to create leaf node.");
-            return NULL;
       }
 
       return leafnode;

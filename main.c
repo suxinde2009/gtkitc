@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "./base/sll.h"
 #include "./base/dll.h"
+#include "./base/bt.h"
 
 static void DisplaySNode(snode* inNode)
 {
@@ -10,6 +11,11 @@ static void DisplaySNode(snode* inNode)
 static void DisplayDNode(dnode* inNode)
 {
       printf("%s [%s] -> ", (char *)inNode->payload, (char *)inNode->prev->payload);
+}
+
+static void DisplayBTreeLeaf(btree* inLeaf)
+{
+      puts("TODO: Show leaf payload.");
 }
 
 int main()
@@ -23,9 +29,11 @@ int main()
       dnode* dn = NULL;
       dnode* curDNode = NULL;
 
+      btree* bt = NULL;
+
       /* Singly linked list example. */
 
-      puts("Singly linked list run...\n");
+      puts("\nSingly linked list run...\n=========================\n");
 
       un = CreateSNode();
 
@@ -49,7 +57,7 @@ int main()
 
       /* Doubly linked list example. */
 
-      puts("\nDoubly linked list run...\n");
+      puts("\nDoubly linked list run...\n=========================\n");
 
       dn = CreateDNode();
 
@@ -70,6 +78,14 @@ int main()
       ListDNodes(dn, DisplayDNode);
 
       DestroyDNodeList(dn);
+
+      puts("\nBinary tree run...\n==================\n");
+
+      bt = CreateLeafNode();
+
+      PrintBTree(bt, DisplayBTreeLeaf);
+
+      DestroyTree(bt);
 
       return 0;
 }

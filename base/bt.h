@@ -10,5 +10,7 @@ typedef struct _BTREE
 } btree;
 
 btree* CreateLeafNode();
+void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *));
+int DestroyTree(btree* tree);
 
 #endif

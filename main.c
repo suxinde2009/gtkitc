@@ -22,7 +22,7 @@ static void DisplayBTreeLeaf(btree* inLeaf)
 int main()
 {
 
-      const char* testdata[] = {"Marleine", "Mary", "Butcher"};
+      const char* testdata[] = {"Marleine", "Mary", "Butcher", "Derek", "Andrew", "Dean", "Neil"};
 
       snode* un = NULL;
       snode* curSNode = NULL;

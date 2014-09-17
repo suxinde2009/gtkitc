@@ -35,7 +35,6 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
 {
-      puts("Adding leaf.");
 
       if(root == NULL)
       {

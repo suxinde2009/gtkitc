@@ -9,8 +9,11 @@ typedef struct _BTREE
       struct _BTREE* rleaf;
 } btree;
 
+typedef enum {_LEFT, _RIGHT} BRANCH;
+
 btree* CreateLeafNode();
 void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *));
+void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch);
 int DestroyTree(btree* tree);
 
 #endif

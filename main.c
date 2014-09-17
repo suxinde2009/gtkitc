@@ -15,7 +15,8 @@ static void DisplayDNode(dnode* inNode)
 
 static void DisplayBTreeLeaf(btree* inLeaf)
 {
-      puts("TODO: Show leaf payload.");
+      printf("[root: %s] [lleaf: %s] [rleaf: %s]", (char *)inLeaf->payload,
+            (char *)inLeaf->lleaf->payload, (char *)inLeaf->rleaf->payload);
 }
 
 int main()

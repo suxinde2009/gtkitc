@@ -31,6 +31,11 @@ void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *))
       }
 }
 
+void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
+{
+
+}
+
 int DestroyTree(btree* tree)
 {
       if(tree == NULL)

@@ -15,13 +15,13 @@ btree* CreateLeafNode()
       }
       else
       {
-            puts("Failed to create leaf node.");
+            perror("CreateLeafNode(): Failed to create leaf node.");
       }
 
       return leafnode;
 }
 
-void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *))
+void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 {
       puts("Displaying binary tree...");
 
@@ -29,6 +29,8 @@ void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *))
       {
             puts("Root node is null.");
       }
+
+
 }
 
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
@@ -60,7 +62,7 @@ void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
       }
 }
 
-int DestroyTree(btree* tree)
+int DestroyTree(btree* tree, WALK wlk)
 {
       if(tree == NULL)
       {

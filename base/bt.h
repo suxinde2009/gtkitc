@@ -13,8 +13,8 @@ typedef enum {_LEFT, _RIGHT} BRANCH;
 typedef enum {_BREADTHFIRST, _DEPTHFIRST} WALK;
 
 btree* CreateLeafNode();
-void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *));
+void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *));
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch);
-int DestroyTree(btree* tree);
+int DestroyTree(btree* tree, WALK wlk);
 
 #endif

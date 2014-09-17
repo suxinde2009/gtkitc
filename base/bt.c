@@ -33,7 +33,31 @@ void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *))
 
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
 {
+      puts("Adding leaf.");
 
+      if(root == NULL)
+      {
+            perror("AppendLeaf(): Root node is NULL!");
+            return;
+      }
+
+      if(newLeaf == NULL)
+      {
+            perror("AppendLeaf(): New node is NULL!");
+            return;
+      }
+
+      if(branch == _RIGHT)
+      {
+            puts("Adding new node to right branch.");
+            root->rleaf = newLeaf;
+      }
+      else
+      if(branch == _LEFT)
+      {
+            puts("Adding new node to left branch.");
+            root->lleaf = newLeaf;
+      }
 }
 
 int DestroyTree(btree* tree)

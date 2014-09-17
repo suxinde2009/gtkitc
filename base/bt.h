@@ -10,6 +10,7 @@ typedef struct _BTREE
 } btree;
 
 typedef enum {_LEFT, _RIGHT} BRANCH;
+typedef enum {_BREADTHFIRST, _DEPTHFIRST} WALK;
 
 btree* CreateLeafNode();
 void PrintBTree(btree* rootNode, void (*payloaddisplay)(btree *));

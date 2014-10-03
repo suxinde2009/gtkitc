@@ -6,17 +6,11 @@ BASE = ./base/
 RMF = rm -f
 GCCWALL = gcc -g -Wall
 
-.PHONY: cleanall cleanobj cleanexe
+.PHONY: clean
 
 all:
 	$(GCCWALL) main.c $(BASE)sll.c $(BASE)dll.c $(BASE)bt.c -std=c89 -pedantic -o gtkitc
 
-# Phonies
-cleanall:
+clean:
 	$(RMF) gtkitc *.o *~
 
-cleanobj:
-	$(RMF) gtkitc.o
-
-cleanexe:
-	$(RMF) gtkitc

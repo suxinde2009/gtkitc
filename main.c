@@ -86,10 +86,17 @@ int main()
 
       AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
       AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
+      
+      bt->payload = (char *)testdata[0];
+      printf("In root payload is: %s\n", (char*)bt->payload);
+      bt->lleaf->payload = (char *)testdata[1];
+      printf("In left leaf is: %s\n", (char*)bt->lleaf->payload);
+      bt->rleaf->payload = (char *)testdata[2];
+      printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
 
-      PrintBTree(bt, _BREADTHFIRST, DisplayBTreeLeaf);
+      PrintBTree(bt, BREADTH_FIRST, DisplayBTreeLeaf);
 
-      DestroyTree(bt, _BREADTHFIRST);
+      DestroyTree(bt, BREADTH_FIRST);
 
       return 0;
 }

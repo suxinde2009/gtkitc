@@ -4,13 +4,13 @@
 /* Binary tree node. */
 typedef struct _BTREE
 {
-      void* payload;
-      struct _BTREE* lleaf;
-      struct _BTREE* rleaf;
+	void* payload;
+	struct _BTREE* lleaf;
+	struct _BTREE* rleaf;
 } btree;
 
 typedef enum {LEFT_LEAF, RIGHT_LEAF} BRANCH;
-typedef enum {_BREADTHFIRST, _DEPTHFIRST} WALK;
+typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
 
 btree* CreateLeafNode();
 void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *));

@@ -9,7 +9,7 @@ typedef struct _BTREE
       struct _BTREE* rleaf;
 } btree;
 
-typedef enum {_LEFT, _RIGHT} BRANCH;
+typedef enum {LEFT_LEAF, RIGHT_LEAF} BRANCH;
 typedef enum {_BREADTHFIRST, _DEPTHFIRST} WALK;
 
 btree* CreateLeafNode();

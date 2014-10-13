@@ -84,8 +84,8 @@ int main()
 
       bt = CreateLeafNode();
 
-      AppendLeaf(bt, CreateLeafNode(), _RIGHT);
-      AppendLeaf(bt, CreateLeafNode(), _LEFT);
+      AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
+      AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
 
       PrintBTree(bt, _BREADTHFIRST, DisplayBTreeLeaf);
 

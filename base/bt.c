@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bt.h"
+#include "sll.h"
 
 btree* CreateLeafNode()
 {
@@ -48,13 +49,13 @@ void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)
             return;
       }
 
-      if(branch == _RIGHT)
+      if(branch == RIGHT_LEAF)
       {
             puts("Adding new node to right branch.");
             root->rleaf = newLeaf;
       }
       else
-      if(branch == _LEFT)
+      if(branch == LEFT_LEAF)
       {
             puts("Adding new node to left branch.");
             root->lleaf = newLeaf;

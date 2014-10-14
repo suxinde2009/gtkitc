@@ -15,14 +15,16 @@ static void DisplayDNode(dnode* inNode)
 
 static void DisplayBTreeLeaf(btree* inLeaf)
 {
-      printf("[root: %s] [lleaf: %s] [rleaf: %s]", (char *)inLeaf->payload,
-            (char *)inLeaf->lleaf->payload, (char *)inLeaf->rleaf->payload);
+      printf("[root: %s](%d) [lleaf: %s](%d) [rleaf: %s](%d)\n", 
+			(char *)inLeaf->payload, inLeaf->visited,
+            (char *)inLeaf->lleaf->payload, inLeaf->lleaf->visited,
+            (char *)inLeaf->rleaf->payload, inLeaf->rleaf->visited);
 }
 
 int main()
 {
 
-      const char* testdata[] = {"Marleine", "Mary", "Butcher", "Derek", "Andrew", "Dean", "Neil"};
+      const char* testdata[] = {"0", "1", "2", "3", "4", "5", "6"};
 
       snode* un = NULL;
       snode* curSNode = NULL;
@@ -94,9 +96,9 @@ int main()
       bt->rleaf->payload = (char *)testdata[2];
       printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
 
-      PrintBTree(bt, BREADTH_FIRST, DisplayBTreeLeaf);
+      PrintBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
 
-      DestroyTree(bt, BREADTH_FIRST);
+      DestroyTree(bt, DEPTH_FIRST);
 
       return 0;
 }

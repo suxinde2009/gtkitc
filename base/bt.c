@@ -11,6 +11,7 @@ btree* CreateLeafNode()
 	{
 		leafnode->lleaf = NULL;
 		leafnode->rleaf = NULL;
+		leafnode->visited = 0;
 
 		puts("Created leaf node");
 	}
@@ -24,6 +25,9 @@ btree* CreateLeafNode()
 
 void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 {
+	btree* current;
+	(void)current; /* Eliminate unimportant unused var warning. */
+	
 	puts("Displaying binary tree...");
 
 	if(rootNode == NULL)
@@ -31,9 +35,40 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		puts("Root node is null.");
 		return;
 	}
+	
+	current = rootNode;
 
 	if(wlk == DEPTH_FIRST)
 	{
+		puts("Printing depth first.");
+		
+		payloaddisplay(current);
+		
+		/* Walk the left leaf of the root and subsequent leafs. */
+		if(current->lleaf != NULL && current->lleaf->visited == 0)
+		{
+			/* Mark this root visited. */
+			current->visited = 1;
+			
+			/* Move current to left leaf. */
+			current = current->lleaf;
+			current->visited = 1;
+			payloaddisplay(current);
+		}
+		else
+		/* Left leaf visited? Traverse right leaf. */
+		if(current->lleaf != NULL && current->lleaf->visited == 1)
+		{
+			
+		}
+		
+		return;
+	}
+	
+	if(wlk == BREADTH_FIRST)
+	{
+		puts("Printing breadth first.");
+		
 		return;
 	}
 }

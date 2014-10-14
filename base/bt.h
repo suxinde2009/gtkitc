@@ -5,6 +5,7 @@
 typedef struct _BTREE
 {
 	void* payload;
+	int visited;
 	struct _BTREE* lleaf;
 	struct _BTREE* rleaf;
 } btree;

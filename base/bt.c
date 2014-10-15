@@ -46,7 +46,7 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 		while(1)
 		{
-			/* Walking the left branches first. */
+			puts("Walking the left branches first.");
 			if(current->lleaf)
 			{
 				current = current->lleaf;
@@ -56,6 +56,21 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 			break;
 		
+		}
+		
+		current = rootNode;
+		
+		while(1)
+		{
+			puts("Walking the right branches next.");
+			if(current->rleaf)
+			{
+				current = current->rleaf;
+				payloaddisplay(current);
+				continue;
+			}
+		
+			break;			
 		}
 	
 		return;

@@ -94,6 +94,7 @@ int main()
 
 	bt = CreateLeafNode();
 
+	/* Root assignments. */
 	AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
 
@@ -103,6 +104,24 @@ int main()
 	printf("In left leaf is: %s\n", (char*)bt->lleaf->payload);
 	bt->rleaf->payload = (char *)testdata[2];
 	printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
+	
+	/* Left leaf assignments. */
+	AppendLeaf(bt->lleaf, CreateLeafNode(), RIGHT_LEAF);
+	AppendLeaf(bt->lleaf, CreateLeafNode(), LEFT_LEAF);	
+	
+	bt->lleaf->lleaf->payload = (char *)testdata[3];
+	printf("In lleaf-lleaf payload is: %s\n", (char*)bt->lleaf->lleaf->payload);
+	bt->lleaf->rleaf->payload = (char *)testdata[4];
+	printf("In lleaf-rleaf payload is: %s\n", (char*)bt->lleaf->rleaf->payload);
+	
+	/* Right leaf assignments. */
+	AppendLeaf(bt->rleaf, CreateLeafNode(), RIGHT_LEAF);
+	AppendLeaf(bt->rleaf, CreateLeafNode(), LEFT_LEAF);	
+	
+	bt->rleaf->lleaf->payload = (char *)testdata[5];
+	printf("In rleaf-lleaf payload is: %s\n", (char*)bt->rleaf->lleaf->payload);
+	bt->rleaf->rleaf->payload = (char *)testdata[6];
+	printf("In rleaf-rleaf payload is: %s\n", (char*)bt->rleaf->rleaf->payload);	
 
 	PrintBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
 

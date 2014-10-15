@@ -5,100 +5,106 @@
 
 static void DisplaySNode(snode* inNode)
 {
-      printf("%s -> ", (char *)inNode->payload);
+	printf("%s -> ", (char *)inNode->payload);
 }
 
 static void DisplayDNode(dnode* inNode)
 {
-      printf("%s [%s] -> ", (char *)inNode->payload, (char *)inNode->prev->payload);
+	printf("%s [%s] -> ", (char *)inNode->payload, (char *)inNode->prev->payload);
 }
 
 static void DisplayBTreeLeaf(btree* inLeaf)
 {
-      printf("[root: %s](%d) [lleaf: %s](%d) [rleaf: %s](%d)\n", 
-			(char *)inLeaf->payload, inLeaf->visited,
-            (char *)inLeaf->lleaf->payload, inLeaf->lleaf->visited,
-            (char *)inLeaf->rleaf->payload, inLeaf->rleaf->visited);
+	if(!inLeaf->lleaf && !inLeaf->rleaf)
+	{
+		puts("NULL leaf nodes encountered.");
+		return;
+	}
+	
+	printf("[root: %s](%d) [lleaf: %s](%d) [rleaf: %s](%d)\n", 
+		(char *)inLeaf->payload, inLeaf->visited,
+		(char *)inLeaf->lleaf->payload, inLeaf->lleaf->visited,
+		(char *)inLeaf->rleaf->payload, inLeaf->rleaf->visited);
 }
 
 int main()
 {
 
-      const char* testdata[] = {"0", "1", "2", "3", "4", "5", "6"};
+	const char* testdata[] = {"0", "1", "2", "3", "4", "5", "6"};
 
-      snode* un = NULL;
-      snode* curSNode = NULL;
+	snode* un = NULL;
+	snode* curSNode = NULL;
 
-      dnode* dn = NULL;
-      dnode* curDNode = NULL;
+	dnode* dn = NULL;
+	dnode* curDNode = NULL;
 
-      btree* bt = NULL;
+	btree* bt = NULL;
 
-      /* Singly linked list example. */
+	/* Singly linked list example. */
 
-      puts("\nSingly linked list run...\n=========================\n");
+	puts("\nSingly linked list run...\n=========================\n");
 
-      un = CreateSNode();
+	un = CreateSNode();
 
-      AppendSNode(un, CreateSNode());
-      AppendSNode(un, CreateSNode());
+	AppendSNode(un, CreateSNode());
+	AppendSNode(un, CreateSNode());
 
-      curSNode = un;
-      curSNode->payload = (char *)testdata[0];
-      printf("In root payload is: %s\n", (char*)curSNode->payload);
-      curSNode = curSNode->next;
-      curSNode->payload = (char *)testdata[1];
-      printf("In next payload is: %s\n", (char*)curSNode->payload);
-      curSNode = curSNode->next;
-      curSNode->payload = (char *)testdata[2];
-      printf("In last payload is: %s\n", (char*)curSNode->payload);
-      curSNode = NULL;
+	curSNode = un;
+	curSNode->payload = (char *)testdata[0];
+	printf("In root payload is: %s\n", (char*)curSNode->payload);
+	curSNode = curSNode->next;
+	curSNode->payload = (char *)testdata[1];
+	printf("In next payload is: %s\n", (char*)curSNode->payload);
+	curSNode = curSNode->next;
+	curSNode->payload = (char *)testdata[2];
+	printf("In last payload is: %s\n", (char*)curSNode->payload);
+	curSNode = NULL;
 
-      ListSNodes(un, DisplaySNode);
+	ListSNodes(un, DisplaySNode);
 
-      DestroySNodeList(un);
+	DestroySNodeList(un);
 
-      /* Doubly linked list example. */
+	/* Doubly linked list example. */
 
-      puts("\nDoubly linked list run...\n=========================\n");
+	puts("\nDoubly linked list run...\n=========================\n");
 
-      dn = CreateDNode();
+	dn = CreateDNode();
 
-      AppendDNode(dn, CreateDNode());
-      AppendDNode(dn, CreateDNode());
+	AppendDNode(dn, CreateDNode());
+	AppendDNode(dn, CreateDNode());
 
-      curDNode = dn;
-      curDNode->payload = (char *)testdata[0];
-      printf("In root payload is: %s\n", (char*)curDNode->payload);
-      curDNode = curDNode->next;
-      curDNode->payload = (char *)testdata[1];
-      printf("In next payload is: %s\n", (char*)curDNode->payload);
-      curDNode = curDNode->next;
-      curDNode->payload = (char *)testdata[2];
-      printf("In last payload is: %s\n", (char*)curDNode->payload);
-      curDNode = NULL;
+	curDNode = dn;
+	curDNode->payload = (char *)testdata[0];
+	printf("In root payload is: %s\n", (char*)curDNode->payload);
+	curDNode = curDNode->next;
+	curDNode->payload = (char *)testdata[1];
+	printf("In next payload is: %s\n", (char*)curDNode->payload);
+	curDNode = curDNode->next;
+	curDNode->payload = (char *)testdata[2];
+	printf("In last payload is: %s\n", (char*)curDNode->payload);
+	curDNode = NULL;
 
-      ListDNodes(dn, DisplayDNode);
+	ListDNodes(dn, DisplayDNode);
 
-      DestroyDNodeList(dn);
+	DestroyDNodeList(dn);
 
-      puts("\nBinary tree run...\n==================\n");
+	puts("\nBinary tree run...\n==================\n");
 
-      bt = CreateLeafNode();
+	bt = CreateLeafNode();
 
-      AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
-      AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
-      
-      bt->payload = (char *)testdata[0];
-      printf("In root payload is: %s\n", (char*)bt->payload);
-      bt->lleaf->payload = (char *)testdata[1];
-      printf("In left leaf is: %s\n", (char*)bt->lleaf->payload);
-      bt->rleaf->payload = (char *)testdata[2];
-      printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
+	AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
+	AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
 
-      PrintBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
+	bt->payload = (char *)testdata[0];
+	printf("In root payload is: %s\n", (char*)bt->payload);
+	bt->lleaf->payload = (char *)testdata[1];
+	printf("In left leaf is: %s\n", (char*)bt->lleaf->payload);
+	bt->rleaf->payload = (char *)testdata[2];
+	printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
 
-      DestroyTree(bt, DEPTH_FIRST);
+	PrintBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
 
-      return 0;
+	DestroyTree(bt, DEPTH_FIRST);
+
+	return 0;
 }

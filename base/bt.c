@@ -53,6 +53,7 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 			/* Move current to left leaf. */
 			current = current->lleaf;
 			current->visited = 1;
+			
 			payloaddisplay(current);
 		}
 		else

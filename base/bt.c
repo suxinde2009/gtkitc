@@ -44,25 +44,20 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 		payloaddisplay(current);
 		
-		/* Walk the left leaf of the root and subsequent leafs. */
-		if(current->lleaf != NULL && current->lleaf->visited == 0)
+		while(1)
 		{
-			/* Mark this root visited. */
-			current->visited = 1;
-			
-			/* Move current to left leaf. */
-			current = current->lleaf;
-			current->visited = 1;
-			
-			payloaddisplay(current);
-		}
-		else
-		/* Left leaf visited? Traverse right leaf. */
-		if(current->lleaf != NULL && current->lleaf->visited == 1)
-		{
-			
-		}
+			/* Walking the left branches first. */
+			if(current->lleaf)
+			{
+				current = current->lleaf;
+				payloaddisplay(current);
+				continue;
+			}
 		
+			break;
+		
+		}
+	
 		return;
 	}
 	

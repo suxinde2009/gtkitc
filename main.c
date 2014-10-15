@@ -87,6 +87,8 @@ int main()
 	ListDNodes(dn, DisplayDNode);
 
 	DestroyDNodeList(dn);
+	
+	/* Binary tree example. */
 
 	puts("\nBinary tree run...\n==================\n");
 

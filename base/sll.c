@@ -148,6 +148,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *))
 {
 	snode* markedNode;
+	int count = 0;
 	
 	if(rootNode == NULL)
 	{
@@ -182,6 +183,30 @@ snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *
 		rootNode = markedNode;
 		
 		return rootNode;
+	}
+	else
+	{
+		puts("Finding required node and deleting.");
+		
+		markedNode = rootNode->next;
+
+		while(1)
+		{
+			if(count == sequence)
+			{
+				puts("Deleting intermediate node.");
+				break;
+			}
+			else
+			if(markedNode == markedNode->next)
+			{
+				puts("Got to last node.");
+				break;
+			}
+
+			markedNode = markedNode->next;
+			count++;
+		}		
 	}
 	
 	return rootNode;

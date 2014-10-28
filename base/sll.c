@@ -181,7 +181,7 @@ snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *
 		
 		rootNode = markedNode;
 		
-		return markedNode;
+		return rootNode;
 	}
 	
 	return rootNode;

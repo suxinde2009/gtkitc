@@ -61,6 +61,10 @@ int main()
 	curSNode = NULL;
 
 	ListSNodes(un, DisplaySNode);
+	
+	un = DeleteSNode(un, 0, DisplaySNode);
+
+	ListSNodes(un, DisplaySNode);
 
 	DestroySNodeList(un);
 

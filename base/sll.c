@@ -112,7 +112,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 
       if(rootNode == NULL)
       {
-            perror("Empty (NULL) snode list provided.");
+            puts("Empty (NULL) snode list provided.");
             return;
       }
 
@@ -142,4 +142,47 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
       }
 
       puts("o\n");
+}
+
+/* Affine functions. */
+snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *))
+{
+	snode* markedNode;
+	
+	if(rootNode == NULL)
+	{
+		puts("List is empty so there are no nodes to delete.");
+		return 0;
+	}
+	
+	if(rootNode == rootNode->next)
+	{
+		puts("Only a root node exists.");
+		
+		/* Check if we were deleting the root node anyway. */
+		if(sequence == 0)
+		{
+			puts("Deleting root node.");
+			free(rootNode);
+			rootNode = NULL;
+			
+			return rootNode;
+		}
+	}
+	
+	/* We have at least two nodes in the list */
+	if(sequence == 0)
+	{
+		puts("Deleting root node from list.");
+		
+		markedNode = rootNode->next;
+		
+		free(rootNode);
+		
+		rootNode = markedNode;
+		
+		return markedNode;
+	}
+	
+	return rootNode;
 }

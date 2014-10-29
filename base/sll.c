@@ -145,9 +145,9 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 }
 
 /* Affine functions. */
-snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *))
+snode* DeleteSNode(snode* rootNode, int sequence)
 {
-	snode* markedNode;
+	snode* markedNode, *prevNode, *trashNode;
 	int count = 0;
 	
 	if(rootNode == NULL)
@@ -188,6 +188,7 @@ snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *
 	{
 		puts("Finding required node and deleting.");
 		
+		prevNode = rootNode;
 		markedNode = rootNode->next;
 
 		while(1)
@@ -195,7 +196,11 @@ snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *
 			if(count == sequence)
 			{
 				puts("Deleting intermediate node.");
-				break;
+				
+				prevNode->next = markedNode->next;
+				free(markedNode);
+				
+				return rootNode;
 			}
 			else
 			if(markedNode == markedNode->next)
@@ -203,8 +208,9 @@ snode* DeleteSNode(snode* rootNode, int sequence, void (*payloaddisplay)(snode *
 				puts("Got to last node.");
 				break;
 			}
+			
+			prevNode = markedNode;
 
-			markedNode = markedNode->next;
 			count++;
 		}		
 	}

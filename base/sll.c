@@ -147,7 +147,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 /* Affine functions. */
 snode* DeleteSNode(snode* rootNode, int sequence)
 {
-	snode* markedNode, *prevNode, *trashNode;
+	snode* markedNode, *prevNode;
 	int count = 0;
 	
 	if(rootNode == NULL)
@@ -195,9 +195,8 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 			if(count == sequence)
 			{				
 				prevNode->next = markedNode->next;
-				trashNode = markedNode;
 				
-				free(trashNode);
+				free(markedNode);
 				
 				return rootNode;
 			}

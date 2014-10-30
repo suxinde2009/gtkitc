@@ -147,7 +147,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 /* Affine functions. */
 snode* DeleteSNode(snode* rootNode, int sequence)
 {
-	snode* markedNode, *prevNode;
+	snode* markedNode, *prevNode, *trashNode;
 	int count = 0;
 	
 	if(rootNode == NULL)
@@ -188,19 +188,22 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 	{
 		puts("Finding required node and deleting.");
 		
-		prevNode = rootNode;
+		markedNode = rootNode;
 
 		while(1)
 		{
 			if(count == sequence)
-			{
-				printf("Got to count %d.\n", count);
-				printf("The payload that will be deleted is [%s]\n", (char *)prevNode->payload);
+			{				
+				prevNode->next = markedNode->next;
+				trashNode = markedNode;
+				
+				free(trashNode);
 				
 				return rootNode;
 			}
 			
-			prevNode = prevNode->next;
+			prevNode = markedNode;
+			markedNode = markedNode->next;
 			count++;
 		}		
 	}

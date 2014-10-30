@@ -62,7 +62,7 @@ int main()
 
 	ListSNodes(un, DisplaySNode);
 	
-	un = DeleteSNode(un, 1);
+	un = DeleteSNode(un, 2);
 
 	ListSNodes(un, DisplaySNode);
 

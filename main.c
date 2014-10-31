@@ -62,6 +62,7 @@ int main()
 
 	ListSNodes(un, DisplaySNode);
 	
+	puts("Deleting selected node in list.");
 	un = DeleteSNode(un, 1);
 
 	ListSNodes(un, DisplaySNode);

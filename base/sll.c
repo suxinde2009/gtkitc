@@ -149,6 +149,7 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 {
 	snode* markedNode, *prevNode;
 	int count = 0;
+	int exceeded = 0;
 	
 	if(rootNode == NULL)
 	{
@@ -208,9 +209,18 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 				return rootNode;
 			}
 			
+			if(exceeded)
+			{
+				perror("Requested node to be deleted is past end of list.");
+				break;
+			}
+			
 			prevNode = markedNode;
 			markedNode = markedNode->next;
 			count++;
+			
+			if(markedNode == markedNode->next)
+				exceeded = 1;
 			
 		}		
 	}

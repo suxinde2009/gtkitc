@@ -193,10 +193,15 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 		while(1)
 		{
 			if(count == sequence)
-			{				
+			{
+				printf("Count: %i\n", count);	
+				/* Remove the intermediate node. */			
 				prevNode->next = markedNode->next;
 				
-				free(markedNode);
+				if(markedNode->next != markedNode)
+					free(markedNode);
+				else
+					puts("Last node encouintered points to itself!");
 				
 				return rootNode;
 			}
@@ -204,6 +209,7 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 			prevNode = markedNode;
 			markedNode = markedNode->next;
 			count++;
+			
 		}		
 	}
 	

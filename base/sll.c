@@ -227,3 +227,8 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 	
 	return rootNode;
 }
+
+snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
+{
+	return rootNode;
+}

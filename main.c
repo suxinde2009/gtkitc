@@ -1,12 +1,8 @@
 #include <stdio.h>
-#include "./base/sll.h"
+#include "./testsuite/sll_tests.h"
 #include "./base/dll.h"
 #include "./base/bt.h"
 
-static void DisplaySNode(snode* inNode)
-{
-	printf("%s -> ", (char *)inNode->payload);
-}
 
 static void DisplayDNode(dnode* inNode)
 {
@@ -32,42 +28,13 @@ int main()
 
 	const char* testdata[] = {"0", "1", "2", "3", "4", "5", "6"};
 
-	snode* un = NULL;
-	snode* curSNode = NULL;
 
 	dnode* dn = NULL;
 	dnode* curDNode = NULL;
 
 	btree* bt = NULL;
 
-	/* Singly linked list example. */
-
-	puts("\nSingly linked list run...\n=========================\n");
-
-	un = CreateSNode();
-
-	AppendSNode(un, CreateSNode());
-	AppendSNode(un, CreateSNode());
-
-	curSNode = un;
-	curSNode->payload = (char *)testdata[0];
-	printf("In root payload is: %s\n", (char*)curSNode->payload);
-	curSNode = curSNode->next;
-	curSNode->payload = (char *)testdata[1];
-	printf("In next payload is: %s\n", (char*)curSNode->payload);
-	curSNode = curSNode->next;
-	curSNode->payload = (char *)testdata[2];
-	printf("In last payload is: %s\n", (char*)curSNode->payload);
-	curSNode = NULL;
-
-	ListSNodes(un, DisplaySNode);
-	
-	puts("Deleting selected node in list.");
-	un = DeleteSNode(un, 1);
-
-	ListSNodes(un, DisplaySNode);
-
-	DestroySNodeList(un);
+	sll_test_run();
 
 	/* Doubly linked list example. */
 

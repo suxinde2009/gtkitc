@@ -2,14 +2,17 @@
 # To build just do: make -f gtkitc.mk
 
 # Aliases
-BASE = ./base/
+BASEDIR = ./base/
+TESTSDIR = ./testsuite/
+BASECODE = $(BASEDIR)sll.c $(BASEDIR)dll.c $(BASEDIR)bt.c
+TESTCODE = $(TESTSDIR)sll_tests.c
 RMF = rm -f
 GCCWALL = gcc -g -Wall
 
 .PHONY: clean
 
 all:
-	$(GCCWALL) main.c $(BASE)sll.c $(BASE)dll.c $(BASE)bt.c -std=c89 -pedantic -o gtkitc
+	$(GCCWALL) main.c $(BASECODE) $(TESTCODE) -std=c89 -pedantic -o gtkitc
 
 clean:
 	$(RMF) gtkitc *.o *~

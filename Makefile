@@ -5,7 +5,7 @@
 BASEDIR = ./base/
 TESTSDIR = ./testsuite/
 BASECODE = $(BASEDIR)sll.c $(BASEDIR)dll.c $(BASEDIR)bt.c
-TESTCODE = $(TESTSDIR)sll_tests.c
+TESTCODE = $(TESTSDIR)sll_tests.c $(TESTSDIR)dll_tests.c $(TESTSDIR)btree_tests.c
 RMF = rm -f
 GCCWALL = gcc -g -Wall
 
@@ -16,4 +16,3 @@ all:
 
 clean:
 	$(RMF) gtkitc *.o *~
-

@@ -251,11 +251,21 @@ snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 	
 	while(1)
 	{
+		count++;
+		
 		if(count == sequence)
 		{
-			/* Insert the node at specified sequence. */
-			prevNode->next = newNode;
-			newNode->next = markedNode;
+			if(markedNode != markedNode->next)
+			{
+				/* Insert the node at specified sequence. */
+				prevNode->next = newNode;
+				newNode->next = markedNode;
+			}
+			else
+			{
+				markedNode->next = newNode;
+				newNode->next = newNode;
+			}
 			
 			return rootNode;
 		}
@@ -267,8 +277,7 @@ snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 		}
 		
 		prevNode = markedNode;
-		markedNode = markedNode->next;
-		count++;					
+		markedNode = markedNode->next;					
 		
 		if(markedNode == markedNode->next)
 			exceeded = 1;		

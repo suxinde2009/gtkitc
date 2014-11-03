@@ -11,6 +11,7 @@ void sll_test_run()
 {
 	snode* un = NULL;
 	snode* curSNode = NULL;
+	snode* newestNode = NULL;
 	
 	/* Singly linked list example. */
 
@@ -35,8 +36,19 @@ void sll_test_run()
 	ListSNodes(un, DisplaySNode);
 	
 	puts("Deleting selected node in list.");
-	un = DeleteSNode(un, 1);
+	un = DeleteSNode(un, 2);
 
+	ListSNodes(un, DisplaySNode);
+	
+	puts("Adding a node.");
+	newestNode = CreateSNode();
+	
+	if(newestNode != NULL)
+	{
+		newestNode->payload = (char *)testdata[6];
+		un = InsertSNode(un, newestNode, 1);
+	}
+		
 	ListSNodes(un, DisplaySNode);
 
 	DestroySNodeList(un);	

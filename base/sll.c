@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "sll.h"
 
+/* Marked nodes and previous nodes for deletion and appending nodes. */
+static snode* markedNode, *prevNode;
+
 static int FreeSNode(snode* cur, snode* next)
 {
 
@@ -122,23 +125,22 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
       }
       else
       {
+			payloaddisplay(rootNode);
 
-            payloaddisplay(rootNode);
+			nextNode = rootNode->next;
 
-            nextNode = rootNode->next;
+			while(1)
+			{
+				if(nextNode == nextNode->next)
+				{
+					payloaddisplay(nextNode);
+					break;
+				}
+				else
+					payloaddisplay(nextNode);
 
-            while(1)
-            {
-                  if(nextNode == nextNode->next)
-                  {
-                        payloaddisplay(nextNode);
-                        break;
-                  }
-                  else
-                        payloaddisplay(nextNode);
-
-                  nextNode = nextNode->next;
-            }
+				nextNode = nextNode->next;
+			}
       }
 
       puts("o\n");
@@ -147,7 +149,6 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 /* Affine functions. */
 snode* DeleteSNode(snode* rootNode, int sequence)
 {
-	snode* markedNode, *prevNode;
 	int count = 0;
 	int exceeded = 0;
 	
@@ -230,5 +231,48 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 
 snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 {
+	int count = 0;
+	int exceeded = 0;	
+	
+	if(rootNode == NULL)
+		return newNode;
+	
+	/* New node to be added to the very beginning. */	
+	if(sequence == 0)
+	{
+		newNode->next = rootNode;
+		rootNode = newNode;
+		
+		return rootNode;
+	}
+	
+	prevNode = rootNode;
+	markedNode = rootNode->next;
+	
+	while(1)
+	{
+		if(count == sequence)
+		{
+			/* Insert the node at specified sequence. */
+			prevNode->next = newNode;
+			newNode->next = markedNode;
+			
+			return rootNode;
+		}
+		
+		if(exceeded)
+		{
+			perror("Node to be added is past end of list. Maybe use AppendSNode()?");
+			break;
+		}
+		
+		prevNode = markedNode;
+		markedNode = markedNode->next;
+		count++;					
+		
+		if(markedNode == markedNode->next)
+			exceeded = 1;		
+	}
+	
 	return rootNode;
 }

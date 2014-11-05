@@ -16,7 +16,7 @@ void AppendSNode(snode* rootNode, snode* newNode);
 void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *));
 
 /* Affine functions. */
-snode* DeleteSNode(snode* rootNode, int sequence);
-snode* InsertSNode(snode* rootNode, snode* newNode, int sequence);
+snode* DeleteSNode(snode* rootNode, const unsigned int sequence);
+snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence);
 
 #endif

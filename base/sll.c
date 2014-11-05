@@ -147,7 +147,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 }
 
 /* Affine functions. */
-snode* DeleteSNode(snode* rootNode, int sequence)
+snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
 {
 	int count = 0;
 	int exceeded = 0;
@@ -229,13 +229,15 @@ snode* DeleteSNode(snode* rootNode, int sequence)
 	return rootNode;
 }
 
-snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
+snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
 {
-	int count = 0;
+	int count = 1;
 	int exceeded = 0;	
 	
 	if(rootNode == NULL)
 		return newNode;
+		
+	printf("Inserting new node at position [%d]\n", sequence);
 	
 	/* New node to be added to the very beginning. */	
 	if(sequence == 0)
@@ -247,15 +249,14 @@ snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 	}
 	
 	prevNode = rootNode;
-	markedNode = rootNode->next;
+	markedNode = prevNode->next;
 	
 	while(1)
 	{
-		count++;
 		
 		if(count == sequence)
 		{
-			if(markedNode != markedNode->next)
+			if(prevNode != prevNode->next)
 			{
 				/* Insert the node at specified sequence. */
 				prevNode->next = newNode;
@@ -263,6 +264,7 @@ snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 			}
 			else
 			{
+				/* Attach node to end of list and make it point to itself. */
 				markedNode->next = newNode;
 				newNode->next = newNode;
 			}
@@ -276,8 +278,10 @@ snode* InsertSNode(snode* rootNode, snode* newNode, int sequence)
 			break;
 		}
 		
+		count++;
+		
 		prevNode = markedNode;
-		markedNode = markedNode->next;					
+		markedNode = markedNode->next;			
 		
 		if(markedNode == markedNode->next)
 			exceeded = 1;		

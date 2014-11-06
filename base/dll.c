@@ -150,3 +150,20 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
       puts("o\n");
 
 }
+
+/* Affine functions. */
+
+dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence)
+{
+	if(rootNode == NULL)
+	{
+		
+	}
+	
+	return rootNode;
+}
+
+dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence)
+{
+	return rootNode;
+}

@@ -168,23 +168,19 @@ snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
 			puts("Deleting root node.");
 			free(rootNode);
 			rootNode = NULL;
-			
-			return rootNode;
 		}
+		
+		return rootNode;
 	}
 	
 	/* We have at least two nodes in the list */
 	if(sequence == 0)
 	{
-		puts("Deleting root node from list.");
-		
 		markedNode = rootNode->next;
 		
 		free(rootNode);
 		
 		rootNode = markedNode;
-		
-		return rootNode;
 	}
 	else
 	{	
@@ -212,7 +208,7 @@ snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
 			
 			if(exceeded)
 			{
-				perror("Requested node to be deleted is past end of list.");
+				perror("Requested SLL node to be deleted is past end of list.");
 				break;
 			}
 			

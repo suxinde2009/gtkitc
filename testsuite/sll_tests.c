@@ -35,7 +35,7 @@ void sll_test_run()
 
 	ListSNodes(un, DisplaySNode);
 	
-	puts("Deleting selected node in list.");
+	puts("Deleting selected SLL node in list.");
 	un = DeleteSNode(un, 1);
 
 	ListSNodes(un, DisplaySNode);

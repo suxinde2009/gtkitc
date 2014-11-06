@@ -33,6 +33,11 @@ void dll_test_run()
 	curDNode = NULL;
 
 	ListDNodes(dn, DisplayDNode);
+	
+	puts("Deleting selected DLL node in list.");
+	dn = DeleteDNode(dn, 1);
+	
+	ListDNodes(dn, DisplayDNode);	
 
 	DestroyDNodeList(dn);	
 }

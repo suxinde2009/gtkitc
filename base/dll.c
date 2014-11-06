@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "dll.h"
 
+/* Marked nodes and previous nodes for deletion and appending nodes. */
+static dnode* markedNode, *prevNode, *nextNode;
+
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -155,9 +158,84 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
 dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence)
 {
+	int count = 0;
+	int exceeded = 0;
+	
 	if(rootNode == NULL)
 	{
+		puts("Node list is empty for DLL. Nothing to delete.");
+		return NULL;
+	}
+	
+	if(rootNode == rootNode->next)
+	{
+		puts("Only DLL root node exists.");
 		
+		/* Check to see if we intended to delete this node. */
+		if(sequence == 0)
+		{
+			puts("Deleting root node as sequence is 0.");
+			free(rootNode);
+		}
+		
+		return rootNode;
+	}
+	
+	/* We have more than one node in the list. */
+	if(sequence == 0)
+	{
+		/* We remove the root node. */
+		markedNode = rootNode->next;
+		markedNode->prev = markedNode;
+		
+		free(rootNode);
+		
+		rootNode = markedNode;
+		
+		return rootNode;
+	}
+	else
+	{
+		markedNode = rootNode;
+		
+		while(1)
+		{
+			if(count == sequence)
+			{
+				if(markedNode->next != markedNode)
+				{
+					/* Remove the intermediate node. */			
+					prevNode = markedNode->prev;
+					nextNode = markedNode->next;
+					
+					prevNode->next = nextNode;
+					nextNode->prev = prevNode;
+					
+				}
+				else
+				{
+					/* Last node encountered points to itself! */
+					prevNode = markedNode->prev;
+					prevNode->next = prevNode;
+				}
+				
+				free(markedNode);
+				
+				return rootNode;				
+			}
+			
+			if(exceeded)
+			{
+				perror("Requested DLL node to be deleted is past end of list.");
+				break;
+			}
+			
+			markedNode = markedNode->next;
+			count++;
+			
+			if(markedNode == markedNode->next)
+				exceeded = 1;						
+		}
 	}
 	
 	return rootNode;

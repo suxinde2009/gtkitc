@@ -227,13 +227,13 @@ snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
 
 snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
 {
-	int count = 1;
+	unsigned int count = 1;
 	int exceeded = 0;	
 	
 	if(rootNode == NULL)
 		return newNode;
 		
-	printf("Inserting new node at position [%d]\n", sequence);
+	printf("Inserting new SLL node at position [%d]\n", sequence);
 	
 	/* New node to be added to the very beginning. */	
 	if(sequence == 0)
@@ -270,7 +270,7 @@ snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
 		
 		if(exceeded)
 		{
-			perror("Node to be added is past end of list. Maybe use AppendSNode()?");
+			perror("Node to be added is past end of list. Maybe use AppendSNode()? ");
 			break;
 		}
 		

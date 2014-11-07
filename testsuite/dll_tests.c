@@ -11,6 +11,7 @@ void dll_test_run()
 {
 	dnode* dn = NULL;
 	dnode* curDNode = NULL;	
+	dnode* newestNode = NULL;
 	
 	/* Doubly linked list example. */
 
@@ -37,7 +38,18 @@ void dll_test_run()
 	puts("Deleting selected DLL node in list.");
 	dn = DeleteDNode(dn, 1);
 	
-	ListDNodes(dn, DisplayDNode);	
+	ListDNodes(dn, DisplayDNode);
+	
+	puts("Adding a node.");
+	newestNode = CreateDNode();
+	
+	if(newestNode != NULL)
+	{
+		newestNode->payload = (char *)testdata[6];
+		dn = InsertDNode(dn, newestNode, 2);
+	}
+	
+	ListDNodes(dn, DisplayDNode);		
 
 	DestroyDNodeList(dn);	
 }

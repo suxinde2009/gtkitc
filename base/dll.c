@@ -32,7 +32,7 @@ dnode* CreateDNode()
       if(nde != NULL)
       {
 
-          /* Node points to inself. */
+          /* Node points to itself. */
           nde->prev = nde;
           nde->next = nde;
 
@@ -210,7 +210,6 @@ dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence)
 					
 					prevNode->next = nextNode;
 					nextNode->prev = prevNode;
-					
 				}
 				else
 				{
@@ -243,5 +242,66 @@ dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence)
 
 dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence)
 {
+	unsigned int count = 1;
+	int exceeded = 0;
+	dnode* prevMarker, *nextMarker;
+	
+	if(rootNode == NULL)
+		return newNode;
+		
+	printf("Inserting new DLL node at position [%d]\n", sequence);
+	
+	if(sequence == 0)
+	{
+		rootNode->prev = newNode;
+		newNode->next = rootNode;
+		
+		rootNode = newNode;
+		rootNode->prev = rootNode;
+		
+		return rootNode;
+	}
+	
+	markedNode = rootNode->next;
+	
+	while(1)
+	{
+		if(count == sequence)
+		{
+			if(markedNode->prev != markedNode->prev->next)
+			{
+				prevMarker = markedNode->prev;
+				nextMarker = markedNode->prev->next;
+				/* Insert the node at specified sequence. */
+				puts("Insert intermediate");
+				prevMarker->next = newNode;
+				newNode->prev = prevMarker;
+				newNode->next = nextMarker;
+				nextMarker->prev = newNode;
+			}
+			else
+			{
+				/* Attach node to end of list and make it point to itself. */
+				puts("Insert end");
+				markedNode->next = newNode;
+				newNode->next = newNode;
+			}
+			
+			return rootNode;
+		}
+		
+		if(exceeded)
+		{
+			perror("Node to be added is past end of list. Maybe use AppendDNode()? ");
+			break;
+		}
+		
+		count++;
+		markedNode = markedNode->next;
+		
+		if(markedNode == markedNode->next)
+			exceeded = 1;							
+	}	
+	
 	return rootNode;
 }

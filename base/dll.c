@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "dll.h"
 
+/* Marked nodes and previous nodes for deletion and appending nodes. */
+static dnode* markedNode, *prevNode, *nextNode;
+
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -29,7 +32,7 @@ dnode* CreateDNode()
       if(nde != NULL)
       {
 
-          /* Node points to inself. */
+          /* Node points to itself. */
           nde->prev = nde;
           nde->next = nde;
 
@@ -149,4 +152,154 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
       puts("o\n");
 
+}
+
+/* Affine functions. */
+
+dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence)
+{
+	int count = 0;
+	int exceeded = 0;
+	
+	if(rootNode == NULL)
+	{
+		puts("Node list is empty for DLL. Nothing to delete.");
+		return NULL;
+	}
+	
+	if(rootNode == rootNode->next)
+	{
+		puts("Only DLL root node exists.");
+		
+		/* Check to see if we intended to delete this node. */
+		if(sequence == 0)
+		{
+			puts("Deleting root node as sequence is 0.");
+			free(rootNode);
+		}
+		
+		return rootNode;
+	}
+	
+	/* We have more than one node in the list. */
+	if(sequence == 0)
+	{
+		/* We remove the root node. */
+		markedNode = rootNode->next;
+		markedNode->prev = markedNode;
+		
+		free(rootNode);
+		
+		rootNode = markedNode;
+		
+		return rootNode;
+	}
+	else
+	{
+		markedNode = rootNode;
+		
+		while(1)
+		{
+			if(count == sequence)
+			{
+				if(markedNode->next != markedNode)
+				{
+					/* Remove the intermediate node. */			
+					prevNode = markedNode->prev;
+					nextNode = markedNode->next;
+					
+					prevNode->next = nextNode;
+					nextNode->prev = prevNode;
+				}
+				else
+				{
+					/* Last node encountered points to itself! */
+					prevNode = markedNode->prev;
+					prevNode->next = prevNode;
+				}
+				
+				free(markedNode);
+				
+				return rootNode;				
+			}
+			
+			if(exceeded)
+			{
+				perror("Requested DLL node to be deleted is past end of list.");
+				break;
+			}
+			
+			markedNode = markedNode->next;
+			count++;
+			
+			if(markedNode == markedNode->next)
+				exceeded = 1;						
+		}
+	}
+	
+	return rootNode;
+}
+
+dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence)
+{
+	unsigned int count = 1;
+	int exceeded = 0;
+	dnode* prevMarker, *nextMarker;
+	
+	if(rootNode == NULL)
+		return newNode;
+		
+	printf("Inserting new DLL node at position [%d]\n", sequence);
+	
+	if(sequence == 0)
+	{
+		rootNode->prev = newNode;
+		newNode->next = rootNode;
+		
+		rootNode = newNode;
+		rootNode->prev = rootNode;
+		
+		return rootNode;
+	}
+	
+	markedNode = rootNode->next;
+	
+	while(1)
+	{
+		if(count == sequence)
+		{
+			if(markedNode->prev != markedNode->prev->next)
+			{
+				prevMarker = markedNode->prev;
+				nextMarker = markedNode->prev->next;
+				/* Insert the node at specified sequence. */
+				prevMarker->next = newNode;
+				newNode->prev = prevMarker;
+				newNode->next = nextMarker;
+				nextMarker->prev = newNode;
+			}
+			else
+			{
+				/* Attach node to end of list and make it point to itself. */
+				markedNode->next = newNode;
+				newNode->next = newNode;
+			}
+			
+			return rootNode;
+		}
+		
+		if(exceeded)
+		{
+			perror("Node to be added is past end of list. Maybe use AppendDNode()? ");
+			break;
+		}
+		
+		count++;
+		markedNode = markedNode->next;
+		
+		if(markedNode == markedNode->next)
+			exceeded = 1;							
+	}	
+	
+	return rootNode;
 }

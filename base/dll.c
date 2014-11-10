@@ -273,7 +273,6 @@ dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence)
 				prevMarker = markedNode->prev;
 				nextMarker = markedNode->prev->next;
 				/* Insert the node at specified sequence. */
-				puts("Insert intermediate");
 				prevMarker->next = newNode;
 				newNode->prev = prevMarker;
 				newNode->next = nextMarker;
@@ -282,7 +281,6 @@ dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence)
 			else
 			{
 				/* Attach node to end of list and make it point to itself. */
-				puts("Insert end");
 				markedNode->next = newNode;
 				newNode->next = newNode;
 			}

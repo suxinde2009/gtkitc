@@ -248,8 +248,7 @@ snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
 	markedNode = prevNode->next;
 	
 	while(1)
-	{
-		
+	{	
 		if(count == sequence)
 		{
 			if(prevNode != prevNode->next)

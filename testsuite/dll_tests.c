@@ -21,6 +21,7 @@ void dll_test_run()
 
 	AppendDNode(dn, CreateDNode());
 	AppendDNode(dn, CreateDNode());
+	AppendDNode(dn, CreateDNode());
 
 	curDNode = dn;
 	curDNode->payload = (char *)testdata[0];
@@ -30,6 +31,9 @@ void dll_test_run()
 	printf("In next payload is: %s\n", (char*)curDNode->payload);
 	curDNode = curDNode->next;
 	curDNode->payload = (char *)testdata[2];
+	printf("In last payload is: %s\n", (char*)curDNode->payload);
+	curDNode = curDNode->next;
+	curDNode->payload = (char *)testdata[3];
 	printf("In last payload is: %s\n", (char*)curDNode->payload);
 	curDNode = NULL;
 
@@ -46,7 +50,7 @@ void dll_test_run()
 	if(newestNode != NULL)
 	{
 		newestNode->payload = (char *)testdata[6];
-		dn = InsertDNode(dn, newestNode, 2);
+		dn = InsertDNode(dn, newestNode, 1);
 	}
 	
 	ListDNodes(dn, DisplayDNode);		

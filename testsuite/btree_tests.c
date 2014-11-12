@@ -10,7 +10,7 @@ static void DisplayBTreeLeaf(btree* inLeaf)
 		return;
 	}
 	
-	printf("[root: %s](%d) [lleaf: %s](%d) [rleaf: %s](%d)\n", 
+	printf("           [root: %s](%d)\n [lleaf: %s](%d)    [rleaf: %s](%d)\n", 
 		(char *)inLeaf->payload, inLeaf->visited,
 		(char *)inLeaf->lleaf->payload, inLeaf->lleaf->visited,
 		(char *)inLeaf->rleaf->payload, inLeaf->rleaf->visited);

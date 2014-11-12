@@ -7,7 +7,7 @@ int main()
 {
 	sll_test_run();
 	dll_test_run();
-	/*btree_test_run();*/
+	btree_test_run();
 
 	return 0;
 }

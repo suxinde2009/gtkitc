@@ -1,6 +1,6 @@
-#include "test_data.h"
-#include "sll_tests.h"
-#include "../base/sll.h"
+#include <test_data.h>
+#include <sll_tests.h>
+#include <sll.h>
 
 static void DisplaySNode(snode* inNode)
 {

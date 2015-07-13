@@ -1,9 +1,9 @@
 # Builds gtkitc for demo purposes. Feel free to integrate into your own makefiles for your projects.
 
-INCS = -I inc
-TESTSDIR = ./testsuite/
+TESTSDIR = testsuite/
+INCS = -I inc -I $(TESTSDIR)inc
 BASECODE = $(wildcard src/*.c)
-TESTCODE = $(wildcard testsuite/*.c) 
+TESTCODE = $(wildcard $(TESTSDIR)src/*.c) 
 RMF = rm -f
 GCCWALL = gcc -g -Wall
 

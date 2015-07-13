@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "./testsuite/sll_tests.h"
-#include "./testsuite/dll_tests.h"
-#include "./testsuite/btree_tests.h"
+#include <sll_tests.h>
+#include <dll_tests.h>
+#include <btree_tests.h>
 
 int main()
 {

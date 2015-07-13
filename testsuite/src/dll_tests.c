@@ -1,6 +1,6 @@
-#include "test_data.h"
-#include "dll_tests.h"
-#include "../base/dll.h"
+#include <test_data.h>
+#include <dll_tests.h>
+#include <dll.h>
 
 static void DisplayDNode(dnode* inNode)
 {

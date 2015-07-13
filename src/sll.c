@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "sll.h"
+#include <sll.h>
 
 /* Marked nodes and previous nodes for deletion and appending nodes. */
 static snode* markedNode, *prevNode;

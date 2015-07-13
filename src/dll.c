@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "dll.h"
+#include <dll.h>
 
 /* Marked nodes and previous nodes for deletion and appending nodes. */
 static dnode* markedNode, *prevNode, *nextNode;

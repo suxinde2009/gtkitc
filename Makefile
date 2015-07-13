@@ -1,18 +1,16 @@
 # Builds gtkitc for demo purposes. Feel free to integrate into your own makefiles for your projects.
-# To build just do: make -f gtkitc.mk
 
-# Aliases
-BASEDIR = ./base/
+INCS = -I inc
 TESTSDIR = ./testsuite/
-BASECODE = $(BASEDIR)sll.c $(BASEDIR)dll.c $(BASEDIR)bt.c
-TESTCODE = $(TESTSDIR)sll_tests.c $(TESTSDIR)dll_tests.c $(TESTSDIR)btree_tests.c
+BASECODE = $(wildcard src/*.c)
+TESTCODE = $(wildcard testsuite/*.c) 
 RMF = rm -f
 GCCWALL = gcc -g -Wall
 
 .PHONY: clean
 
 all:
-	$(GCCWALL) main.c $(BASECODE) $(TESTCODE) -std=c89 -pedantic -o gtkitc
+	$(GCCWALL) $(INCS) main.c $(BASECODE) $(TESTCODE) -std=c89 -pedantic -o gtkitc
 
 clean:
 	$(RMF) gtkitc *.o *~

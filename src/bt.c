@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "bt.h"
-#include "sll.h"
+#include <bt.h>
+#include <sll.h>
 
 btree* CreateLeafNode()
 {

@@ -37,12 +37,12 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 	}
 	
 	current = rootNode;
+	
+	payloaddisplay(current);
 
 	if(wlk == DEPTH_FIRST)
 	{
-		puts("Printing depth first.");
-		
-		payloaddisplay(current);
+		puts("\n** Printing depth first. **\n");
 		
 		while(1)
 		{
@@ -50,6 +50,7 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 			if(current->lleaf)
 			{
 				current = current->lleaf;
+				current->visited++;
 				payloaddisplay(current);
 				continue;
 			}
@@ -66,6 +67,7 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 			if(current->rleaf)
 			{
 				current = current->rleaf;
+				current->visited++;
 				payloaddisplay(current);
 				continue;
 			}
@@ -78,7 +80,7 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 	
 	if(wlk == BREADTH_FIRST)
 	{
-		puts("Printing breadth first.");
+		puts("\n** Printing breadth first. **\n");
 		
 		return;
 	}
@@ -125,6 +127,6 @@ int DestroyTree(btree* tree, WALK wlk)
 		free(tree);
 	}
 
-	/* We return the number of nodes that we failed to detroy. */
+	/* We return the number of nodes that we failed to destroy. */
 	return 0;
 }

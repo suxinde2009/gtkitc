@@ -53,9 +53,18 @@ void btree_test_run()
 	bt->rleaf->lleaf->payload = (char *)testdata[5];
 	printf("In rleaf-lleaf payload is: %s\n", (char*)bt->rleaf->lleaf->payload);
 	bt->rleaf->rleaf->payload = (char *)testdata[6];
-	printf("In rleaf-rleaf payload is: %s\n", (char*)bt->rleaf->rleaf->payload);	
+	printf("In rleaf-rleaf payload is: %s\n", (char*)bt->rleaf->rleaf->payload);
+	
+	/* Let's add a few more! */
+	AppendLeaf(bt->rleaf->lleaf, CreateLeafNode(), RIGHT_LEAF);
+	AppendLeaf(bt->rleaf->lleaf, CreateLeafNode(), LEFT_LEAF);
+	
+	bt->rleaf->lleaf->lleaf->payload = (char *)testdata[7];
+	bt->rleaf->lleaf->rleaf->payload = (char *)testdata[8];
+	printf("In rleaf-lleaf-lleaf payload is: %s\n", (char*)bt->rleaf->lleaf->lleaf->payload);
+	printf("In rleaf-lleaf-rleaf payload is: %s\n", (char*)bt->rleaf->lleaf->rleaf->payload);
 
-	PrintBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
+	WalkBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
 
 	DestroyTree(bt, DEPTH_FIRST);
 }

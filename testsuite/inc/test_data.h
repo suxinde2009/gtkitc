@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-static const char* testdata[] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six"};
+static const char* testdata[] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "One Million", "Two Million"};
 
 #endif

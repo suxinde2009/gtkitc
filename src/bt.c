@@ -23,10 +23,9 @@ btree* CreateLeafNode()
 	return leafnode;
 }
 
-void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
+void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 {
 	btree* current;
-	(void)current; /* Eliminate unimportant unused var warning. */
 	
 	puts("Displaying binary tree...");
 
@@ -39,51 +38,36 @@ void PrintBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 	current = rootNode;
 	
 	payloaddisplay(current);
+	
+	current->visited++;
 
 	if(wlk == DEPTH_FIRST)
 	{
-		puts("\n** Printing depth first. **\n");
+		puts("\n** Walking depth first. **\n");
 		
-		while(1)
+		if(current->lleaf != NULL)
 		{
-			puts("Walking the left branches first.");
-			if(current->lleaf)
-			{
-				current = current->lleaf;
-				current->visited++;
-				payloaddisplay(current);
-				continue;
-			}
-		
-			break;
-		
+			puts("Walking left branch...");
+			current->previous = current;
+			current = current->lleaf;
+			current->visited++;
 		}
-		
-		current = rootNode;
-		
-		while(1)
+		else
+		if(current->rleaf != NULL)
 		{
-			puts("Walking the right branches next.");
-			if(current->rleaf)
-			{
-				current = current->rleaf;
-				current->visited++;
-				payloaddisplay(current);
-				continue;
-			}
-		
-			break;			
+			puts("Walking right branch...");
+			current->previous = current;
+			current = current->rleaf;
+			current->visited++;			
 		}
-	
-		return;
 	}
 	
 	if(wlk == BREADTH_FIRST)
 	{
-		puts("\n** Printing breadth first. **\n");
-		
-		return;
+		puts("\n** Walking breadth first. **\n");
+	
 	}
+
 }
 
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch)

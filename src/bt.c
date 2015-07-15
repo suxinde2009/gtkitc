@@ -27,6 +27,14 @@ static void _traverseRightLeaf(btree* node)
 	node->visited++;	
 }
 
+static void _printNodeDetail(btree* node)
+{
+	printf("		Root[%s] Visits[%d]\nLL[%s] Visits[%d]		RL[%s] Visits[%d]\n",
+		(const char*) node->payload, node->visited,
+		(const char*) node->lleaf->payload, node->lleaf->visited,
+		(const char*) node->rleaf->payload, node->rleaf->visited);
+}
+
 btree* CreateLeafNode()
 {
 	btree* leafnode = (btree *) malloc(sizeof(btree));
@@ -72,11 +80,13 @@ void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		if(current->lleaf != NULL)
 		{
 			_traverseLeftLeaf(current);
+			_printNodeDetail(current);
 		}
 		else
 		if(current->rleaf != NULL)
 		{
-			_traverseRightLeaf(current);		
+			_traverseRightLeaf(current);
+			_printNodeDetail(current);		
 		}
 	}
 	

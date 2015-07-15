@@ -3,6 +3,30 @@
 #include <bt.h>
 #include <sll.h>
 
+/* Support functions. */
+
+static void _traverseLeftLeaf(btree* node)
+{
+	if(node == NULL)
+		return;
+	
+	puts("Walking left leaf...");
+	node->previous = node;
+	node = node->lleaf;
+	node->visited++;	
+}
+
+static void _traverseRightLeaf(btree* node)
+{
+	if(node == NULL)
+		return;
+		
+	puts("Walking right leaf...");
+	node->previous = node;
+	node = node->rleaf;
+	node->visited++;	
+}
+
 btree* CreateLeafNode()
 {
 	btree* leafnode = (btree *) malloc(sizeof(btree));
@@ -47,18 +71,12 @@ void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 		if(current->lleaf != NULL)
 		{
-			puts("Walking left branch...");
-			current->previous = current;
-			current = current->lleaf;
-			current->visited++;
+			_traverseLeftLeaf(current);
 		}
 		else
 		if(current->rleaf != NULL)
 		{
-			puts("Walking right branch...");
-			current->previous = current;
-			current = current->rleaf;
-			current->visited++;			
+			_traverseRightLeaf(current);		
 		}
 	}
 	

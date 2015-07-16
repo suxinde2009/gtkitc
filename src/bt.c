@@ -5,15 +5,15 @@
 
 /* Support functions. */
 
-static void _traverseLeftLeaf(btree* node)
+static void _traverseLeftLeaf(btree** node)
 {
-	if(node == NULL)
+	if(*node == NULL)
 		return;
 	
 	puts("Walking left leaf...");
-	node->previous = node;
-	node = node->lleaf;
-	node->visited++;	
+	(*node)->previous = *node;
+	*node = (*node)->lleaf;
+	(*node)->visited++;	
 }
 
 static void _traverseRightLeaf(btree* node)
@@ -29,7 +29,7 @@ static void _traverseRightLeaf(btree* node)
 
 static void _printNodeDetail(btree* node)
 {
-	printf("		Root[%s] Visits[%d]\nLL[%s] Visits[%d]		RL[%s] Visits[%d]\n",
+	printf("\n		Root[%s] Visits[%d]\nLL[%s] Visits[%d]		RL[%s] Visits[%d]\n",
 		(const char*) node->payload, node->visited,
 		(const char*) node->lleaf->payload, node->lleaf->visited,
 		(const char*) node->rleaf->payload, node->rleaf->visited);
@@ -79,13 +79,13 @@ void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 		if(current->lleaf != NULL)
 		{
-			_traverseLeftLeaf(current);
+			_traverseLeftLeaf((btree*)&current);
 			_printNodeDetail(current);
 		}
 		else
 		if(current->rleaf != NULL)
 		{
-			_traverseRightLeaf(current);
+			/*_traverseRightLeaf(current);*/
 			_printNodeDetail(current);		
 		}
 	}

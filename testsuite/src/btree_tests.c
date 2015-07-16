@@ -26,7 +26,7 @@ void btree_test_run()
 
 	bt = CreateLeafNode();
 
-	/* Root assignments. */
+	puts("\nRoot assignments:\n");
 	AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
 
@@ -37,7 +37,7 @@ void btree_test_run()
 	bt->rleaf->payload = (char *)testdata[2];
 	printf("In right leaf is: %s\n", (char*)bt->rleaf->payload);
 	
-	/* Left leaf assignments. */
+	puts("\nLeft leaf assignments:\n");
 	AppendLeaf(bt->lleaf, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt->lleaf, CreateLeafNode(), LEFT_LEAF);	
 	
@@ -46,7 +46,7 @@ void btree_test_run()
 	bt->lleaf->rleaf->payload = (char *)testdata[4];
 	printf("In lleaf-rleaf payload is: %s\n", (char*)bt->lleaf->rleaf->payload);
 	
-	/* Right leaf assignments. */
+	puts("\nRight leaf assignments:\n");
 	AppendLeaf(bt->rleaf, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt->rleaf, CreateLeafNode(), LEFT_LEAF);	
 	
@@ -55,7 +55,7 @@ void btree_test_run()
 	bt->rleaf->rleaf->payload = (char *)testdata[6];
 	printf("In rleaf-rleaf payload is: %s\n", (char*)bt->rleaf->rleaf->payload);
 	
-	/* Let's add a few more! */
+	puts("\nLet's add a few more:\n");
 	AppendLeaf(bt->rleaf->lleaf, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt->rleaf->lleaf, CreateLeafNode(), LEFT_LEAF);
 	

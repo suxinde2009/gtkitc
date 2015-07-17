@@ -2,20 +2,6 @@
 #include <btree_tests.h>
 #include <bt.h>
 
-static void DisplayBTreeLeaf(btree* inLeaf)
-{
-	if(!inLeaf->lleaf && !inLeaf->rleaf)
-	{
-		puts("NULL leaf nodes encountered.");
-		return;
-	}
-	
-	printf("           [root: %s](%d)\n [lleaf: %s](%d)    [rleaf: %s](%d)\n", 
-		(char *)inLeaf->payload, inLeaf->visited,
-		(char *)inLeaf->lleaf->payload, inLeaf->lleaf->visited,
-		(char *)inLeaf->rleaf->payload, inLeaf->rleaf->visited);
-}
-
 void btree_test_run()
 {
 	btree* bt = NULL;
@@ -64,7 +50,7 @@ void btree_test_run()
 	printf("In rleaf-lleaf-lleaf payload is: %s\n", (char*)bt->rleaf->lleaf->lleaf->payload);
 	printf("In rleaf-lleaf-rleaf payload is: %s\n", (char*)bt->rleaf->lleaf->rleaf->payload);
 
-	WalkBTree(bt, DEPTH_FIRST, DisplayBTreeLeaf);
+	WalkBTree(bt, DEPTH_FIRST);
 
 	DestroyTree(bt, DEPTH_FIRST);
 }

@@ -15,7 +15,7 @@ typedef enum {LEFT_LEAF, RIGHT_LEAF} BRANCH;
 typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
 
 btree* CreateLeafNode();
-void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *));
+void WalkBTree(btree* rootNode, WALK wlk);
 void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch);
 int DestroyTree(btree* tree, WALK wlk);
 

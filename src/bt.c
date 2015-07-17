@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <bt.h>
 #include <sll.h>
+
+static btree* leafnode;
 
 /* Support functions. */
 
@@ -40,7 +43,7 @@ static void _printNodeDetail(btree* node)
 
 btree* CreateLeafNode()
 {
-	btree* leafnode = (btree *) malloc(sizeof(btree));
+	leafnode = (btree *) malloc(sizeof(btree));
 
 	if(leafnode != NULL)
 	{
@@ -58,7 +61,7 @@ btree* CreateLeafNode()
 	return leafnode;
 }
 
-void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
+void WalkBTree(btree* rootNode, WALK wlk)
 {
 	btree* current;
 	
@@ -72,7 +75,7 @@ void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 	
 	current = rootNode;
 	
-	payloaddisplay(current);
+	_printNodeDetail(current);
 	
 	current->visited++;
 
@@ -82,9 +85,7 @@ void WalkBTree(btree* rootNode, WALK wlk, void (*payloaddisplay)(btree *))
 		
 		if(current->lleaf != NULL)
 		{
-			_traverseLeftLeaf((btree*)&current);
-			_printNodeDetail(current);
-			_traverseLeftLeaf((btree*)&current);
+			/*_traverseLeftLeaf((btree*)&current);*/
 			_printNodeDetail(current);
 		}
 		else

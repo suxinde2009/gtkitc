@@ -11,7 +11,9 @@ void btree_test_run()
 	puts("\nBinary tree run...\n==================\n");
 
 	bt = CreateLeafNode();
-
+	
+	
+/*
 	puts("\nRoot assignments:\n");
 	AppendLeaf(bt, CreateLeafNode(), RIGHT_LEAF);
 	AppendLeaf(bt, CreateLeafNode(), LEFT_LEAF);
@@ -49,7 +51,7 @@ void btree_test_run()
 	bt->rleaf->lleaf->rleaf->payload = (char *)testdata[8];
 	printf("In rleaf-lleaf-lleaf payload is: %s\n", (char*)bt->rleaf->lleaf->lleaf->payload);
 	printf("In rleaf-lleaf-rleaf payload is: %s\n", (char*)bt->rleaf->lleaf->rleaf->payload);
-
+*/
 	WalkBTree(bt, DEPTH_FIRST);
 
 	DestroyTree(bt, DEPTH_FIRST);

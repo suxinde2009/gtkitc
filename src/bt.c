@@ -11,7 +11,10 @@ static btree* leafnode;
 static void _traverseLeftLeaf(btree** node)
 {
 	if(*node == NULL)
+	{
+		puts("Left leaf node is NULL.");
 		return;
+	}
 	
 	puts("Walking left leaf...");
 	(*node)->previous = *node;
@@ -22,7 +25,10 @@ static void _traverseLeftLeaf(btree** node)
 static void _traverseRightLeaf(btree** node)
 {
 	if(*node == NULL)
+	{
+		puts("Right leaf node is NULL.");
 		return;
+	}
 		
 	puts("Walking right leaf...");
 	(*node)->previous = *node;
@@ -47,6 +53,7 @@ btree* CreateLeafNode()
 
 	if(leafnode != NULL)
 	{
+		leafnode->payload = NULL;
 		leafnode->lleaf = NULL;
 		leafnode->rleaf = NULL;
 		leafnode->visited = 0;
@@ -61,38 +68,35 @@ btree* CreateLeafNode()
 	return leafnode;
 }
 
-void WalkBTree(btree* rootNode, WALK wlk)
+void WalkBTree(btree* node, WALK wlk)
 {
-	btree* current;
 	
 	puts("Displaying binary tree...");
 
-	if(rootNode == NULL)
+	if(node == NULL)
 	{
 		puts("Root node is null.");
 		return;
 	}
 	
-	current = rootNode;
+	/*_printNodeDetail(current);*/
 	
-	_printNodeDetail(current);
-	
-	current->visited++;
+	node->visited++;
 
 	if(wlk == DEPTH_FIRST)
 	{
 		puts("\n** Walking depth first. **\n");
 		
-		if(current->lleaf != NULL)
+		if(node->lleaf != NULL)
 		{
-			/*_traverseLeftLeaf((btree*)&current);*/
-			_printNodeDetail(current);
+			_traverseLeftLeaf((btree*)&node);
+			/*_printNodeDetail(node);*/
 		}
 		else
-		if(current->rleaf != NULL)
+		if(node->rleaf != NULL)
 		{
-			/*_traverseRightLeaf(current);*/
-			_printNodeDetail(current);		
+			/*_traverseRightLeaf(node);*/
+			/*_printNodeDetail(node);*/		
 		}
 	}
 	

@@ -14,9 +14,4 @@ typedef struct _BTREE
 typedef enum {LEFT_LEAF, RIGHT_LEAF} BRANCH;
 typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
 
-btree* CreateLeafNode();
-void WalkBTree(btree* node, WALK wlk);
-void AppendLeaf(btree* root, btree* newLeaf, BRANCH branch);
-int DestroyTree(btree* tree, WALK wlk);
-
 #endif

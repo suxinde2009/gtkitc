@@ -73,8 +73,9 @@ void DeleteTree()
 {
 	puts("Deleting tree");
 	
-	if(rootNode != NULL)
+	if(current != NULL && current->prev == current)
 	{
+		puts("Deleting root");
 		free(rootNode);
 	}
 }

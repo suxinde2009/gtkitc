@@ -6,12 +6,21 @@ typedef struct _BTREE
 {
 	void* payload;
 	int visited;
-	struct _BTREE* previous;
+	struct _BTREE* prev;
 	struct _BTREE* lleaf;
 	struct _BTREE* rleaf;
 } btree;
 
-typedef enum {LEFT_LEAF, RIGHT_LEAF} BRANCH;
 typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
+
+void InitRoot();
+void DeleteTree();
+
+void CreateLeftLeaf();
+void CreateRightLeaf();
+
+void AdvanceToLeftLeaf();
+void AdvanceToRightLeaf();
+void ReturnToLeafRoot();
 
 #endif

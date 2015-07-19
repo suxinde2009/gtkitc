@@ -3,9 +3,8 @@
 #include <bt.h>
 
 void btree_test_run()
-{
-	btree* bt = NULL;
-	
+{	
 	/* Binary tree example. */
-
+	InitRoot();
+	DeleteTree();
 }

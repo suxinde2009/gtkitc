@@ -19,24 +19,24 @@ void InitRoot()
 	current = rootNode;
 }
 
-void CreateLeftLeaf()
+void CreateLeftLeaf(void* pload)
 {
 	
 }
 
-void CreateRightLeaf()
+void CreateRightLeaf(void* pload)
 {
 	
 }
 
-void AdvanceToLeftLeaf()
+int AdvanceToLeftLeaf()
 {
-	
+	return 0;
 }
 
-void AdvanceToRightLeaf()
+int AdvanceToRightLeaf()
 {
-	
+	return 0;
 }
 
 void ReturnToLeafRoot()

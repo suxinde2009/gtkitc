@@ -19,8 +19,8 @@ void DeleteTree();
 void CreateLeftLeaf();
 void CreateRightLeaf();
 
-void AdvanceToLeftLeaf();
-void AdvanceToRightLeaf();
+int AdvanceToLeftLeaf();
+int AdvanceToRightLeaf();
 void ReturnToLeafRoot();
 
 #endif

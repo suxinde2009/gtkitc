@@ -26,21 +26,41 @@ void InitTree()
 
 void CreateLeftLeaf(void* pload)
 {
-	
+	if(current->lleaf != NULL)
+	{
+		puts("Attempted to create left leaf when already occupied.");
+		return;		
+	}
 }
 
 void CreateRightLeaf(void* pload)
 {
-	
+	if(current->rleaf != NULL)
+	{
+		puts("Attempted to create right leaf when already occupied.");
+		return;		
+	}	
 }
 
 int AdvanceToLeftLeaf()
 {
+	if(current->lleaf != NULL)
+	{
+		puts("Attempted to advance to left leaf when it is NULL.");
+		return 0;		
+	}
+	
 	return 0;
 }
 
 int AdvanceToRightLeaf()
 {
+	if(current->rleaf != NULL)
+	{
+		puts("Attempted to advance to right leaf when it is NULL.");
+		return 0;		
+	}	
+	
 	return 0;
 }
 
@@ -51,6 +71,8 @@ void ReturnToLeafRoot()
 
 void DeleteTree()
 {
+	puts("Deleting tree");
+	
 	if(rootNode != NULL)
 	{
 		free(rootNode);

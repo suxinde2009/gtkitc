@@ -5,6 +5,7 @@
 void btree_test_run()
 {	
 	/* Binary tree example. */
-	InitRoot();
+	InitTree();
+	InitTree();
 	DeleteTree();
 }

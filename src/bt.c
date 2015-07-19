@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <bt.h>
 #include <sll.h>
 
-static btree* rootNode, *current;
+static btree* rootNode = NULL, *current = NULL;
 
-void InitRoot()
+void InitTree()
 {
+	assert((rootNode == NULL) && "Attempted to reinitialize tree!");
+	
+	puts("Initializing tree");
+	
 	rootNode = (btree*) malloc(sizeof(btree));
 	
 	rootNode->prev = rootNode;	/* Root points to itself. */

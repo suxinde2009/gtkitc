@@ -6,5 +6,10 @@ void btree_test_run()
 {	
 	/* Binary tree example. */
 	InitTree();
+	
+	puts("\nAttempt to move to null leaves which will fail...");
+	AdvanceToLeftLeaf();
+	AdvanceToRightLeaf();	
+	
 	DeleteTree();
 }

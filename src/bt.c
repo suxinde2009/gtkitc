@@ -44,29 +44,39 @@ void CreateRightLeaf(void* pload)
 
 int AdvanceToLeftLeaf()
 {
-	if(current->lleaf != NULL)
+	if(current->lleaf == NULL)
 	{
 		puts("Attempted to advance to left leaf when it is NULL.");
 		return 0;		
 	}
 	
-	return 0;
+	puts("Creating left leaf node");
+	
+	current = current->lleaf;
+	
+	return 1;
 }
 
 int AdvanceToRightLeaf()
 {
-	if(current->rleaf != NULL)
+	if(current->rleaf == NULL)
 	{
 		puts("Attempted to advance to right leaf when it is NULL.");
 		return 0;		
 	}	
 	
-	return 0;
+	puts("Creating right leaf node");	
+	
+	current = current->rleaf;
+	
+	return 1;
 }
 
 void ReturnToLeafRoot()
 {
+	assert(current->prev == NULL && "Attempting to return to previous node that is NULL - something is wrong!");
 	
+	current = current->prev;
 }
 
 void DeleteTree()

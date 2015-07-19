@@ -15,6 +15,8 @@ void InitRoot()
 	rootNode->rleaf = NULL;
 	
 	rootNode->visited = 0;
+	
+	current = rootNode;
 }
 
 void CreateLeftLeaf()

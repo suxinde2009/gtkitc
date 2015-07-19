@@ -31,6 +31,20 @@ void CreateLeftLeaf(void* pload)
 		puts("Attempted to create left leaf when already occupied.");
 		return;		
 	}
+	
+	current->lleaf = (btree*) malloc(sizeof(btree));
+	
+	if(current->lleaf == NULL)
+	{
+		puts("Failed to allocate lleaf node.");
+		return;
+	}
+	
+	/* Tie to parent node/leaf. */
+	current->lleaf->prev = current;
+	
+	/* Assign payload */
+	current->lleaf->payload = pload;
 }
 
 void CreateRightLeaf(void* pload)
@@ -39,7 +53,21 @@ void CreateRightLeaf(void* pload)
 	{
 		puts("Attempted to create right leaf when already occupied.");
 		return;		
-	}	
+	}
+	
+	current->rleaf = (btree*) malloc(sizeof(btree));
+	
+	if(current->rleaf == NULL)
+	{
+		puts("Failed to allocate lleaf node.");
+		return;
+	}
+
+	/* Tie to parent node/leaf. */	
+	current->rleaf->prev = current;	
+	
+	/* Assign payload */
+	current->rleaf->payload = pload;
 }
 
 int AdvanceToLeftLeaf()

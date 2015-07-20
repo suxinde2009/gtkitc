@@ -16,8 +16,8 @@ typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
 void InitTree();
 void DeleteTree();
 
-void CreateLeftLeaf();
-void CreateRightLeaf();
+void CreateLeftLeaf(void* pload);
+void CreateRightLeaf(void* pload);
 
 int AdvanceToLeftLeaf();
 int AdvanceToRightLeaf();

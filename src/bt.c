@@ -40,11 +40,19 @@ btree* CreateNodeForLeaf()
 
 int BindNodeToLeftLeaf(btree* newNode)
 {
+	assert(current != NULL && "Referenced node is not NULL for BindNodeToLeftLeaf().");
+	
+	current->lleaf = newNode;
+	
 	return 0;
 }
 
 int BindNodeToRightLeaf(btree* newNode)
 {
+	assert(current != NULL && "Referenced node is not NULL for BindNodeToRightLeaf().");
+	
+	current->rleaf = newNode;	
+	
 	return 0;
 }
 
@@ -56,7 +64,7 @@ int AdvanceToLeftLeaf()
 		return 0;		
 	}
 	
-	puts("Creating left leaf node");
+	puts("Advancing left leaf node");
 	
 	current = current->lleaf;
 	
@@ -71,7 +79,7 @@ int AdvanceToRightLeaf()
 		return 0;		
 	}	
 	
-	puts("Creating right leaf node");	
+	puts("Advancing right leaf node");	
 	
 	current = current->rleaf;
 	

@@ -11,6 +11,7 @@ void btree_test_run()
 	AdvanceToLeftLeaf();
 	AdvanceToRightLeaf();
 	
+	BindNodeToLeftLeaf(CreateNodeForLeaf());
 	AdvanceToLeftLeaf();
 	
 	DeleteTree();

@@ -9,7 +9,11 @@ void btree_test_run()
 	
 	puts("\nAttempt to move to null leaves which will fail...");
 	AdvanceToLeftLeaf();
-	AdvanceToRightLeaf();	
+	AdvanceToRightLeaf();
+	
+	CreateLeftLeaf((void*)testdata[0]);
+	
+	AdvanceToLeftLeaf();
 	
 	DeleteTree();
 }

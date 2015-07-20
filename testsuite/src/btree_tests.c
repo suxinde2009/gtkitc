@@ -11,8 +11,6 @@ void btree_test_run()
 	AdvanceToLeftLeaf();
 	AdvanceToRightLeaf();
 	
-	CreateLeftLeaf((void*)testdata[0]);
-	
 	AdvanceToLeftLeaf();
 	
 	DeleteTree();

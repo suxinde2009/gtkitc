@@ -66,6 +66,7 @@ int AdvanceToLeftLeaf()
 	
 	puts("Advancing left leaf node");
 	
+	current->prev = current;
 	current = current->lleaf;
 	
 	return 1;
@@ -81,6 +82,7 @@ int AdvanceToRightLeaf()
 	
 	puts("Advancing right leaf node");	
 	
+	current->prev = current;
 	current = current->rleaf;
 	
 	return 1;

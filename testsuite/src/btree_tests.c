@@ -14,5 +14,7 @@ void btree_test_run()
 	BindNodeToLeftLeaf(CreateNodeForLeaf());
 	AdvanceToLeftLeaf();
 	
+	ReturnToLeafRoot();
+	
 	DeleteTree();
 }

@@ -1,6 +1,9 @@
 # Executable
 gtkitc
 
+# No idea what this file is, maybe from Atom or something
+core
+
 # Object files
 *.o
 *.ko

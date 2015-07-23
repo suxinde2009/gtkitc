@@ -17,11 +17,17 @@ void InitTree();
 void DeleteTree();
 
 btree* CreateNodeForLeaf();
-int BindNodeToLeftLeaf(btree* newNode);
-int BindNodeToRightLeaf(btree* newNode);
+int BindNewNodeToLeftLeaf(btree* newNode);
+int BindNewNodeToRightLeaf(btree* newNode);
 
 int AdvanceToLeftLeaf();
 int AdvanceToRightLeaf();
 void ReturnToLeafRoot();
+
+int SetPayloadRoot(const char* p);
+int SetPayloadLeftLeaf(const char* p);
+int SetPayloadRightLeaf(const char* p);
+
+void PrintNode();
 
 #endif

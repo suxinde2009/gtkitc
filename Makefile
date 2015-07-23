@@ -10,7 +10,7 @@ GCCWALL = gcc -g -Wall
 .PHONY: clean
 
 all:
-	$(GCCWALL) $(INCS) main.c $(BASECODE) $(TESTCODE) -std=c89 -pedantic -o gtkitc
+	$(GCCWALL) $(INCS) $(BASECODE) $(TESTCODE) -std=c89 -pedantic -o gtkitc
 
 clean:
 	$(RMF) gtkitc *.o *~

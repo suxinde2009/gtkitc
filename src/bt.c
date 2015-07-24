@@ -6,6 +6,11 @@
 
 static btree* rootNode = NULL, *current = NULL;
 
+void PrintNodeAddrs()
+{
+	printf("prev: %x curr: %x\n", current->prev, current);
+}
+
 void InitTree()
 {
 	assert((rootNode == NULL) && "Attempted to reinitialize tree!");
@@ -40,7 +45,7 @@ btree* CreateNodeForLeaf()
 
 int BindNewNodeToLeftLeaf(btree* newNode)
 {
-	current->prev = current;
+	newNode->prev = current;
 	current->lleaf = newNode;
 
 	return 0;
@@ -48,7 +53,8 @@ int BindNewNodeToLeftLeaf(btree* newNode)
 
 int BindNewNodeToRightLeaf(btree* newNode)
 {
-	current->prev = current;
+
+	newNode->prev = current;
 	current->rleaf = newNode;
 
 	return 0;

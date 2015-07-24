@@ -13,6 +13,8 @@ typedef struct _BTREE
 
 typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
 
+void PrintNodeAddrs();
+
 void InitTree();
 void DeleteTree();
 

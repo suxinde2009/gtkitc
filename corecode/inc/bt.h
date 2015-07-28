@@ -5,25 +5,23 @@
 typedef struct _BTREE
 {
 	void* payload;
-	int visited;
+	unsigned int visited;
 	struct _BTREE* prev;
 	struct _BTREE* lleaf;
 	struct _BTREE* rleaf;
 } btree;
 
-typedef enum {BREADTH_FIRST, DEPTH_FIRST} WALK;
-
 void PrintNodeAddrs();
 
-void InitTree();
-void DeleteTree();
+btree* InitTree();
+void DeleteTree(btree* root);
 
 btree* CreateNodeForLeaf();
 int BindNewNodeToLeftLeaf(btree* newNode);
 int BindNewNodeToRightLeaf(btree* newNode);
 
-int AdvanceToLeftLeaf();
-int AdvanceToRightLeaf();
+unsigned int AdvanceToLeftLeaf();
+unsigned int AdvanceToRightLeaf();
 void ReturnToLeafRoot();
 
 int SetPayloadRoot(const char* p);

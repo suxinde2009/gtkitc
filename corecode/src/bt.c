@@ -1,42 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 #include <bt.h>
 #include <sll.h>
 
-static btree* rootNode = NULL, *current = NULL;
+static btree* current = NULL;
 
 void PrintNodeAddrs()
 {
-	printf("prev: %x curr: %x\n", current->prev, current);
+	printf("prev: %p curr: %p\n", (void *)current->prev, (void *)current);
 }
 
-void InitTree()
+btree* InitTree()
 {
-	assert((rootNode == NULL) && "Attempted to reinitialize tree!");
+	btree* root = NULL;
 
 	puts("Initializing tree");
 
-	rootNode = (btree*) malloc(sizeof(btree));
+	root = (btree*) malloc(sizeof(btree));
 
-	rootNode->prev = rootNode;	/* Root points to itself. */
-	rootNode->payload = NULL;
-	rootNode->lleaf = NULL;
-	rootNode->rleaf = NULL;
+	memset(root, 0, sizeof(btree));
 
-	rootNode->visited = 0;
+	root->prev = root;	/* Root points to itself. */
 
-	current = rootNode;
+	current = root;
+
+	return root;
 }
 
 btree* CreateNodeForLeaf()
 {
 	btree* node = (btree*) malloc(sizeof(btree));
 
-	node->lleaf = NULL;
-	node->rleaf = NULL;
-	node->payload = NULL;
-	node->prev = NULL;
+	memset(node, 0, sizeof(btree));
 
 	(node) ? puts("New node created for leaf.") : puts("Failed to create new node for leaf.");
 
@@ -45,22 +42,27 @@ btree* CreateNodeForLeaf()
 
 int BindNewNodeToLeftLeaf(btree* newNode)
 {
+	if(newNode == NULL)
+		return 0;
+
 	newNode->prev = current;
 	current->lleaf = newNode;
 
-	return 0;
+	return 1;
 }
 
 int BindNewNodeToRightLeaf(btree* newNode)
 {
+	if(newNode == NULL)
+		return 0;
 
 	newNode->prev = current;
 	current->rleaf = newNode;
 
-	return 0;
+	return 1;
 }
 
-int AdvanceToLeftLeaf()
+unsigned int AdvanceToLeftLeaf()
 {
 	if(current->lleaf == NULL)
 	{
@@ -73,10 +75,10 @@ int AdvanceToLeftLeaf()
 	current->visited++;
 	current = current->lleaf;
 
-	return 1;
+	return current->visited;
 }
 
-int AdvanceToRightLeaf()
+unsigned int AdvanceToRightLeaf()
 {
 	if(current->rleaf == NULL)
 	{
@@ -89,7 +91,7 @@ int AdvanceToRightLeaf()
 	current->visited++;
 	current = current->rleaf;
 
-	return 1;
+	return current->visited;
 }
 
 void ReturnToLeafRoot()
@@ -104,20 +106,20 @@ void ReturnToLeafRoot()
 	current = current->prev;
 }
 
-void DeleteTree()
+void DeleteTree(btree* root)
 {
 	puts("Deleting tree");
 
 	if(current != NULL && current->prev == current)
 	{
 		puts("Deleting root");
-		free(rootNode);
+		free(root);
 	}
 }
 
 int SetPayloadRoot(const char* p)
 {
-	if(!current->payload)
+	if(current->payload == 0)
 	{
 		current->payload = (void *)p;
 		return 1;
@@ -128,7 +130,7 @@ int SetPayloadRoot(const char* p)
 
 int SetPayloadLeftLeaf(const char* p)
 {
-	if(!current->payload)
+	if(current->payload == 0)
 	{
 		current->payload = (void *)p;
 		return 1;

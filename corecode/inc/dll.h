@@ -1,6 +1,8 @@
 #ifndef _DOUBLY_LINKED_LIST_
 #define _DOUBLY_LINKED_LIST_
 
+#include <typealiases.h>
+
 /* A directed node type. */
 typedef struct _DNODE
 {
@@ -15,7 +17,7 @@ void AppendDNode(dnode* rootNode, dnode* newNode);
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *));
 
 /* Affine functions. */
-dnode* DeleteDNode(dnode* rootNode, const unsigned int sequence);
-dnode* InsertDNode(dnode* rootNode, dnode* newNode, const unsigned int sequence);
+dnode* DeleteDNode(dnode* rootNode, const UINT sequence);
+dnode* InsertDNode(dnode* rootNode, dnode* newNode, const UINT sequence);
 
 #endif

@@ -5,7 +5,10 @@
 #include <bt.h>
 #include <sll.h>
 
+static btree* root = NULL;
 static btree* current = NULL;
+
+typedef void (*voidBTFuncType)(btree*);
 
 void PrintNodeAddrs()
 {
@@ -14,9 +17,13 @@ void PrintNodeAddrs()
 
 btree* InitTree()
 {
-	btree* root = NULL;
+	puts("Initializing tree:");
 
-	puts("Initializing tree");
+	root = (btree*) malloc(sizeof(btree));
+
+	memset(root, 0, sizeof(btree));
+
+	root->prev = root;	/* Root points to itself. */
 
 	root = (btree*) malloc(sizeof(btree));
 
@@ -27,6 +34,46 @@ btree* InitTree()
 	current = root;
 
 	return root;
+}
+
+void ResetTreeVisitCounts(btree* root)
+{
+	voidBTFuncType resetFn;
+
+	resetFn = ResetTreeVisitCounts;
+
+    if(root)
+    {
+        resetFn(root->lleaf);
+        resetFn(root->rleaf);
+        printf("Resetting: %s (%d)\n", (char*) root->payload, root->visited);
+		root->visited = 0;
+    }
+}
+
+void IncrementVisited()
+{
+	current->visited++;
+}
+
+void ZeroVisited()
+{
+	current->visited = 0;
+}
+
+void DeleteTree(btree* root)
+{
+	voidBTFuncType delFn;
+
+	delFn = DeleteTree;
+
+    if(root)
+    {
+        delFn(root->lleaf);
+        delFn(root->rleaf);
+        printf("Deleting: %s (%d)\n", (char*) root->payload, root->visited);
+		free(root);
+    }
 }
 
 btree* CreateNodeForLeaf()
@@ -42,7 +89,7 @@ btree* CreateNodeForLeaf()
 
 int BindNewNodeToLeftLeaf(btree* newNode)
 {
-	if(newNode == NULL)
+	if(!newNode)
 		return 0;
 
 	newNode->prev = current;
@@ -53,7 +100,7 @@ int BindNewNodeToLeftLeaf(btree* newNode)
 
 int BindNewNodeToRightLeaf(btree* newNode)
 {
-	if(newNode == NULL)
+	if(!newNode)
 		return 0;
 
 	newNode->prev = current;
@@ -62,9 +109,9 @@ int BindNewNodeToRightLeaf(btree* newNode)
 	return 1;
 }
 
-unsigned int AdvanceToLeftLeaf()
+UINT AdvanceToLeftLeaf()
 {
-	if(current->lleaf == NULL)
+	if(!current->lleaf)
 	{
 		puts("Attempted to advance to left leaf when it is NULL.");
 		return 0;
@@ -72,15 +119,14 @@ unsigned int AdvanceToLeftLeaf()
 
 	puts("Advancing left leaf node");
 
-	current->visited++;
 	current = current->lleaf;
 
 	return current->visited;
 }
 
-unsigned int AdvanceToRightLeaf()
+UINT AdvanceToRightLeaf()
 {
-	if(current->rleaf == NULL)
+	if(!current->rleaf)
 	{
 		puts("Attempted to advance to right leaf when it is NULL.");
 		return 0;
@@ -88,7 +134,6 @@ unsigned int AdvanceToRightLeaf()
 
 	puts("Advancing right leaf node");
 
-	current->visited++;
 	current = current->rleaf;
 
 	return current->visited;
@@ -106,18 +151,7 @@ void ReturnToLeafRoot()
 	current = current->prev;
 }
 
-void DeleteTree(btree* root)
-{
-	puts("Deleting tree");
-
-	if(current != NULL && current->prev == current)
-	{
-		puts("Deleting root");
-		free(root);
-	}
-}
-
-int SetPayloadRoot(const char* p)
+int SetPayloadLeafRoot(const char* p)
 {
 	if(current->payload == 0)
 	{
@@ -148,6 +182,16 @@ int SetPayloadRightLeaf(const char* p)
 	}
 
 	return 0;
+}
+
+void RewindToRoot()
+{
+	current = root;
+}
+
+btree* GetCurrentNodeAddr()
+{
+	return current;
 }
 
 void PrintNode()

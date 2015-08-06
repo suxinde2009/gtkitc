@@ -10,13 +10,47 @@ void btree_test_run()
 {
 	btreeSearchAlgs searchFunc;
 
+	puts("\nInitializing environment.\n");
+
 	/* Binary tree example. */
 	rootNode = InitTree();
-	SetPayloadRoot(testdata[5]);
-	PrintNodeAddrs();
+	SetPayloadLeafRoot(testdata[5]);
+	IncrementVisited();
+	PrintNode();
+
+	/* Bind a left leaf. */
+	BindNewNodeToLeftLeaf(CreateNodeForLeaf());
+	AdvanceToLeftLeaf();
+	SetPayloadLeafRoot(testdata[1]);
+	IncrementVisited();
+	PrintNode();
+
+	/* Return to leaf root. */
+	ReturnToLeafRoot();
+	IncrementVisited();
+	PrintNode();
+
+	/* Bind right leaf. */
+	BindNewNodeToRightLeaf(CreateNodeForLeaf());
+	AdvanceToRightLeaf();
+	SetPayloadLeafRoot(testdata[6]);
+	IncrementVisited();
+	PrintNode();
+
+	/* Return to root. */
+	ReturnToLeafRoot();
+	IncrementVisited();
+	PrintNode();
+
+	/* Zero tree visit counts. */
+	/*ResetVisitCounts(rootNode);*/
+	RewindToRoot();
+	PrintNode();
+
+	puts("\nTree setup complete.\n");
 
 	/* Perform searches */
-	walk = DEPTH_FIRST_PREORDER;
+	walk = DEPTH_FIRST_POSTORDER;
 
 	switch(walk)
 	{
@@ -38,42 +72,14 @@ void btree_test_run()
 			return;
 	}
 
-	if(searchFunc != NULL)
-		searchFunc(rootNode);
+	searchFunc(rootNode);
 
-/*
-	ReturnToLeafRoot();
+	puts("\nReset tree visit counts.\n");
 
-	puts("Adding left and right leaf to root...");
-	BindNewNodeToRightLeaf(CreateNodeForLeaf());
-	AdvanceToRightLeaf();
+	ResetTreeVisitCounts(rootNode);
+	searchFunc(rootNode);
 
-	PrintNodeAddrs();
-	SetPayloadRoot(testdata[1]);
 	PrintNode();
 
-	ReturnToLeafRoot();
-
-	BindNewNodeToLeftLeaf(CreateNodeForLeaf());
-	AdvanceToLeftLeaf();
-	SetPayloadRoot(testdata[2]);
-
-	PrintNodeAddrs();
-	PrintNode();
-
-	BindNewNodeToLeftLeaf(CreateNodeForLeaf());
-	AdvanceToLeftLeaf();
-	SetPayloadRoot(testdata[3]);
-
-	PrintNodeAddrs();
-	PrintNode();
-
-	BindNewNodeToRightLeaf(CreateNodeForLeaf());
-	AdvanceToRightLeaf();
-	SetPayloadRoot(testdata[4]);
-
-	PrintNodeAddrs();
-	PrintNode();
-*/
 	DeleteTree(rootNode);
 }

@@ -113,7 +113,7 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 
       puts("\nListing SLL nodes...");
 
-      if(rootNode == NULL)
+      if(!rootNode)
       {
             puts("Empty (NULL) snode list provided.");
             return;
@@ -147,21 +147,21 @@ void ListSNodes(snode* rootNode, void (*payloaddisplay)(snode *))
 }
 
 /* Affine functions. */
-snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
+snode* DeleteSNode(snode* rootNode, const UINT sequence)
 {
 	int count = 0;
 	int exceeded = 0;
-	
-	if(rootNode == NULL)
+
+	if(!rootNode)
 	{
 		puts("List is empty so there are no nodes to delete.");
 		return 0;
 	}
-	
+
 	if(rootNode == rootNode->next)
 	{
 		puts("Only a root node exists.");
-		
+
 		/* Check if we were deleting the root node anyway. */
 		if(sequence == 0)
 		{
@@ -169,86 +169,86 @@ snode* DeleteSNode(snode* rootNode, const unsigned int sequence)
 			free(rootNode);
 			rootNode = NULL;
 		}
-		
+
 		return rootNode;
 	}
-	
+
 	/* We have at least two nodes in the list */
 	if(sequence == 0)
 	{
 		markedNode = rootNode->next;
-		
+
 		free(rootNode);
-		
+
 		rootNode = markedNode;
 	}
 	else
-	{	
+	{
 		markedNode = rootNode;
 
 		while(1)
 		{
 			if(count == sequence)
-			{		
+			{
 				if(markedNode->next != markedNode)
 				{
-					/* Remove the intermediate node. */			
-					prevNode->next = markedNode->next;					
+					/* Remove the intermediate node. */
+					prevNode->next = markedNode->next;
 				}
 				else
 				{
 					/* Last node encouintered points to itself! */
 					prevNode->next = prevNode;
 				}
-				
+
 				free(markedNode);
-				
+
 				return rootNode;
 			}
-			
+
 			if(exceeded)
 			{
 				perror("Requested SLL node to be deleted is past end of list.");
 				break;
 			}
-			
+
 			prevNode = markedNode;
 			markedNode = markedNode->next;
 			count++;
-			
+
 			if(markedNode == markedNode->next)
 				exceeded = 1;
-			
-		}		
+
+		}
 	}
-	
+
 	return rootNode;
 }
 
-snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
+snode* InsertSNode(snode* rootNode, snode* newNode, const UINT sequence)
 {
-	unsigned int count = 1;
-	int exceeded = 0;	
-	
-	if(rootNode == NULL)
+	UINT count = 1;
+	int exceeded = 0;
+
+	if(!rootNode)
 		return newNode;
-		
+
 	printf("Inserting new SLL node at position [%d]\n", sequence);
-	
-	/* New node to be added to the very beginning. */	
+
+	/* New node to be added to the very beginning. */
 	if(sequence == 0)
 	{
 		newNode->next = rootNode;
 		rootNode = newNode;
-		
+
 		return rootNode;
 	}
-	
+
 	prevNode = rootNode;
 	markedNode = prevNode->next;
-	
+
 	while(1)
-	{	
+	{
 		if(count == sequence)
 		{
 			if(prevNode != prevNode->next)
@@ -263,24 +263,24 @@ snode* InsertSNode(snode* rootNode, snode* newNode, const unsigned int sequence)
 				markedNode->next = newNode;
 				newNode->next = newNode;
 			}
-			
+
 			return rootNode;
 		}
-		
+
 		if(exceeded)
 		{
 			perror("Node to be added is past end of list. Maybe use AppendSNode()? ");
 			break;
 		}
-		
+
 		count++;
-		
+
 		prevNode = markedNode;
-		markedNode = markedNode->next;			
-		
+		markedNode = markedNode->next;
+
 		if(markedNode == markedNode->next)
-			exceeded = 1;		
+			exceeded = 1;
 	}
-	
+
 	return rootNode;
 }

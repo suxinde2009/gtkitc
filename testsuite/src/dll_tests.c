@@ -10,9 +10,9 @@ static void DisplayDNode(dnode* inNode)
 void dll_test_run()
 {
 	dnode* dn = NULL;
-	dnode* curDNode = NULL;	
+	dnode* curDNode = NULL;
 	dnode* newestNode = NULL;
-	
+
 	/* Doubly linked list example. */
 
 	puts("\nDoubly linked list run...\n=========================\n");
@@ -38,22 +38,22 @@ void dll_test_run()
 	curDNode = NULL;
 
 	ListDNodes(dn, DisplayDNode);
-	
+
 	puts("Deleting selected DLL node in list.");
 	dn = DeleteDNode(dn, 1);
-	
+
 	ListDNodes(dn, DisplayDNode);
-	
+
 	puts("Adding a node.");
 	newestNode = CreateDNode();
-	
+
 	if(newestNode != NULL)
 	{
 		newestNode->payload = (char *)testdata[6];
 		dn = InsertDNode(dn, newestNode, 1);
 	}
-	
-	ListDNodes(dn, DisplayDNode);		
 
-	DestroyDNodeList(dn);	
+	ListDNodes(dn, DisplayDNode);
+
+	DestroyDNodeList(dn);
 }

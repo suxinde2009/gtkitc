@@ -5,36 +5,44 @@
 
 /* Depth first search algorithms */
 
+typedef void (*leafAdvanceFunc)(btree* const);
+
+static leafAdvanceFunc fn = NULL;
+
 void BTDFSPreOrder(btree* const root)
 {
-    int checkedRootRightLeaf = 0;
+    fn = BTDFSPreOrder;
 
-    puts("Called BTDFSPreOrder()");
-
-    PrintNodeAddrs();
-
-    if(root->lleaf == NULL && root->rleaf == NULL)
+    if(root)
     {
-        PrintNode();
-        return;
-    }
-
-    while((root->prev != root) && checkedRootRightLeaf)
-    {
-        checkedRootRightLeaf = 1;
+        printf("Preorder: %s (%d)\n", (char*) root->payload, root->visited);
+        fn(root->lleaf);
+        fn(root->rleaf);
     }
 }
 
 void BTDFSInOrder(btree* const root)
 {
-    puts("Called BTDFSInOrder()");
+    fn = BTDFSInOrder;
 
+    if(root)
+    {
+        fn(root->lleaf);
+        printf("Inorder: %s (%d)\n", (char*) root->payload, root->visited);
+        fn(root->rleaf);
+    }
 }
 
 void BTDFSPostOrder(btree* const root)
 {
-    puts("Called BTDFSPostOrder()");
+    fn = BTDFSPostOrder;
 
+    if(root)
+    {
+        fn(root->lleaf);
+        fn(root->rleaf);
+        printf("Postorder: %s (%d)\n", (char*) root->payload, root->visited);
+    }
 }
 
 /* Breadth first search algorithms */

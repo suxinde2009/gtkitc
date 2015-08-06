@@ -25,12 +25,6 @@ btree* InitTree()
 
 	root->prev = root;	/* Root points to itself. */
 
-	root = (btree*) malloc(sizeof(btree));
-
-	memset(root, 0, sizeof(btree));
-
-	root->prev = root;	/* Root points to itself. */
-
 	current = root;
 
 	return root;
@@ -153,7 +147,7 @@ void ReturnToLeafRoot()
 
 int SetPayloadLeafRoot(const char* p)
 {
-	if(current->payload == 0)
+	if(!current->payload)
 	{
 		current->payload = (void *)p;
 		return 1;

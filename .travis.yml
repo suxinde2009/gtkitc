@@ -3,7 +3,7 @@ language: cpp
 compiler: gcc
 
 script:
-    - gcc -g -Wall -I corecode/inc -I testsuite/inc -I algorithms/inc corecode/src/bt.c corecode/src/dll.c corecode/src/main.c corecode/src/sll.c algorithms/src/bt_search.c testsuite/src/btree_tests.c testsuite/src/dll_tests.c testsuite/src/sll_tests.c -std=c89 -pedantic -o gtkitc
+    - make
     - ./gtkitc
 
 os: linux

@@ -10,6 +10,8 @@ void btree_test_run()
 {
 	btreeSearchAlgs searchFunc;
 
+	puts("\nBinary tree run...\n==================\n");
+
 	puts("\nInitializing environment.\n");
 
 	/* Binary tree example. */

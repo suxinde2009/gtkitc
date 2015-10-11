@@ -40,7 +40,7 @@ void dll_test_run()
 	ListDNodes(dn, DisplayDNode);
 
 	puts("Deleting selected DLL node in list.");
-	dn = DeleteDNode(dn, 1);
+	DeleteDNode((dnode **)&dn, 1);
 
 	ListDNodes(dn, DisplayDNode);
 
@@ -50,7 +50,7 @@ void dll_test_run()
 	if(newestNode != NULL)
 	{
 		newestNode->payload = (char *)testdata[6];
-		dn = InsertDNode(dn, newestNode, 1);
+		InsertDNode((dnode**)&dn, newestNode, 1);
 	}
 
 	ListDNodes(dn, DisplayDNode);

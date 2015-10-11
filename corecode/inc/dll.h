@@ -17,7 +17,7 @@ void AppendDNode(dnode* rootNode, dnode* newNode);
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *));
 
 /* Affine functions. */
-dnode* DeleteDNode(dnode* rootNode, const UINT sequence);
-dnode* InsertDNode(dnode* rootNode, dnode* newNode, const UINT sequence);
+void DeleteDNode(dnode** rootNode, const UINT sequence);
+void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence);
 
 #endif

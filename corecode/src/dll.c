@@ -167,125 +167,40 @@ void DeleteDNode(dnode** rootNode, const UINT sequence)
 		return NULL;
 	}
 
-	if(*rootNode == (*rootNode)->next)
-	{
-		puts("Only DLL root node exists.");
-
-		/* Check to see if we intended to delete this node. */
-		if(sequence == 0)
-		{
-			puts("Deleting root node as sequence is 0.");
-			free(*rootNode);
-		}
-	}
-
-	/* We have more than one node in the list. */
-	if(sequence == 0)
-	{
-		/* We remove the root node. */
-		markedNode = (*rootNode)->next;
-		markedNode->prev = markedNode;
-
-		free(rootNode);
-
-		*rootNode = markedNode;
-	}
-	else
-	{
-		markedNode = *rootNode;
-
-		while(1)
-		{
-			if(count == sequence)
-			{
-				if(markedNode->next != markedNode)
-				{
-					/* Remove the intermediate node. */
-					prevNode = markedNode->prev;
-					nextNode = markedNode->next;
-
-					prevNode->next = nextNode;
-					nextNode->prev = prevNode;
-				}
-				else
-				{
-					/* Last node encountered points to itself! */
-					prevNode = markedNode->prev;
-					prevNode->next = prevNode;
-				}
-
-				free(markedNode);
-			}
-
-			if(exceeded)
-			{
-				perror("Requested DLL node to be deleted is past end of list.");
-				break;
-			}
-
-			markedNode = markedNode->next;
-			count++;
-
-			if(markedNode == markedNode->next)
-				exceeded = 1;
-		}
-	}
 }
 
 void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence)
 {
-	UINT count = 1;
+	UINT count = 0;
 	int exceeded = 0;
 	dnode* prevMarker, *nextMarker;
 
+    /* Creating new dll because it wasn't initialized in the first place. */
 	if(!*rootNode)
+    {
+        puts("Creating new DLL because root node is NULL.");
+
+        *rootNode = newNode;
+        (*rootNode)->next = *rootNode;
+
 		return;
+    }
 
 	printf("Inserting new DLL node at position [%d]\n", sequence);
 
-	if(sequence == 0)
-	{
-		(*rootNode)->prev = newNode;
-		newNode->next = *rootNode;
+    /* If sequence is zero we insert at the start of the list. */
+    if(sequence == 0)
+    {
+        nextMarker = *rootNode;
+        prevMarker = newNode;
 
-		*rootNode = newNode;
-		(*rootNode)->prev = *rootNode;
-	}
+        prevMarker->next = nextMarker;
+        nextMarker->prev = prevMarker;
+        *rootNode = prevMarker;
 
-	markedNode = (*rootNode)->next;
+        return;
+    }
 
-	while(1)
-	{
-		if(count == sequence)
-		{
-			if(markedNode->prev != markedNode->prev->next)
-			{
-				prevMarker = markedNode->prev;
-				nextMarker = markedNode->prev->next;
-				/* Insert the node at specified sequence. */
-				prevMarker->next = newNode;
-				newNode->prev = prevMarker;
-				newNode->next = nextMarker;
-				nextMarker->prev = newNode;
-			}
-			else
-			{
-				/* Attach node to end of list and make it point to itself. */
-				markedNode->next = newNode;
-				newNode->next = newNode;
-			}
-		}
+    /* Otherwise we insert somewhere after the beginning. */
 
-		if(exceeded)
-		{
-			perror("Node to be added is past end of list. Maybe use AppendDNode()? ");
-			break;
-		}
-
-		count++;
-		markedNode = markedNode->next;
-
-		if(markedNode == markedNode->next)
-			exceeded = 1;
-	}
 }

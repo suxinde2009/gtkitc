@@ -50,7 +50,7 @@ void dll_test_run()
 	if(newestNode != NULL)
 	{
 		newestNode->payload = (char *)testdata[6];
-		InsertDNode((dnode**)&dn, newestNode, 1);
+		InsertDNode((dnode**)&dn, newestNode, 0);
 	}
 
 	ListDNodes(dn, DisplayDNode);

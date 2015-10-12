@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <dll.h>
 
-/* Marked nodes and previous nodes for deletion and appending nodes. */
-static dnode* markedNode, *prevNode, *nextNode;
-
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -158,6 +155,7 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
 void DeleteDNode(dnode** rootNode, const UINT sequence)
 {
+/*
 	int count = 0;
 	int exceeded = 0;
 
@@ -166,14 +164,13 @@ void DeleteDNode(dnode** rootNode, const UINT sequence)
 		puts("Node list is empty for DLL. Nothing to delete.");
 		return NULL;
 	}
-
+*/
 }
 
-void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence)
+void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 {
-	UINT count = 0;
-	int exceeded = 0;
-	dnode* prevMarker, *nextMarker;
+	UINT count;
+	dnode* prevMarker, *nextMarker, *currentMarker;
 
     /* Creating new dll because it wasn't initialized in the first place. */
 	if(!*rootNode)
@@ -186,10 +183,10 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence)
 		return;
     }
 
-	printf("Inserting new DLL node at position [%d]\n", sequence);
+	printf("Inserting new DLL node at position [%d]\n", SEQ);
 
     /* If sequence is zero we insert at the start of the list. */
-    if(sequence == 0)
+    if(SEQ == 0)
     {
         nextMarker = *rootNode;
         prevMarker = newNode;
@@ -202,5 +199,36 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence)
     }
 
     /* Otherwise we insert somewhere after the beginning. */
+    if(*rootNode == (*rootNode)->next)
+    {
+        puts("There is only one node in list! Cannot insert.");
 
+        return;
+    }
+
+    /* Point to the root. */
+    currentMarker = *rootNode;
+
+    for(count = 1; count < SEQ; count++)
+    {
+        if(currentMarker == currentMarker->next)
+        {
+            puts("Reached end of list! Not inserting.");
+
+            return;
+        }
+
+        /* Advance currentMarker. */
+        currentMarker = currentMarker->next;
+
+        count++;
+    }
+
+    /* Insert new node. */
+    puts("Inserting new node...");
+    nextMarker = currentMarker->next;
+    currentMarker->next = newNode;
+    newNode->prev = currentMarker;
+    newNode->next = nextMarker;
+    nextMarker->prev = newNode;
 }

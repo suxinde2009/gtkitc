@@ -221,7 +221,7 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
         /* Advance currentMarker. */
         currentMarker = currentMarker->next;
 
-        count++;
+        printf("We are at node [%s]\n", (char *)currentMarker->payload);
     }
 
     /* Insert new node. */

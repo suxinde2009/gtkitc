@@ -16,7 +16,7 @@ GCCWALL = gcc -g -Wall
 .PHONY: clean
 
 all:
-	$(GCCWALL) $(INCS) $(ALLSOURCE) -std=c89 -pedantic -o gtkitc
+	$(GCCWALL) $(INCS) $(ALLSOURCE) -std=gnu89 -pedantic -o gtkitc
 
 clean:
 	$(RMF) gtkitc *.o *~

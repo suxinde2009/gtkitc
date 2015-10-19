@@ -112,6 +112,7 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
       /* Ensure new node points to itself and sentinalNode set. */
       puts("Appended new node.");
       newNode->next = newNode;
+      newNode->prev->sentinalNode = 0;
       newNode->sentinalNode = 1;
 }
 
@@ -139,6 +140,8 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
         nextNode = nextNode->next;
     }
 
+    payloaddisplay(nextNode);
+
     puts("o\n");
 
 }
@@ -163,6 +166,9 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 {
 	UINT count;
 	dnode* prevMarker, *nextMarker, *currentMarker;
+
+    puts("InsertDNode() RETURNING IMMEDIATELY!");
+    return;
 
     /* Creating new dll because it wasn't initialized in the first place. */
 	if(!*rootNode)

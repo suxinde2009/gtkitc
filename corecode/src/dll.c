@@ -32,6 +32,8 @@ dnode* CreateDNode()
         nde->prev = nde;
         nde->next = nde;
 
+        nde->sentinalNode = 1;
+
         puts("Created DLL node.");
 
         return nde;
@@ -79,12 +81,13 @@ void DestroyDNodeList(dnode* rootNode)
 void AppendDNode(dnode* rootNode, dnode* newNode)
 {
 
-      /* Is the root node provided pointing to itself? */
-      if(rootNode->next == rootNode)
+      /* Is the root node also the last node? */
+      if(rootNode->sentinalNode != 0)
       {
             /* We are at the end, so add node. */
             puts("Adding node...");
             rootNode->next = newNode;
+            rootNode->sentinalNode = 0;
             newNode->prev = rootNode;
       }
       else
@@ -94,7 +97,7 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
             dnode* tempNode = rootNode;
 
             /* Traverse along the nodes until last is found. */
-            while(tempNode->next != tempNode)
+            while(tempNode->sentinalNode == 0)
             {
                   tempNode = tempNode->next;
             }
@@ -106,9 +109,10 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
             newNode->prev = tempNode;
       }
 
-      /* Ensure new node points to itself. */
-      puts("Added intermediate node.");
+      /* Ensure new node points to itself and sentinalNode set. */
+      puts("Appended new node.");
       newNode->next = newNode;
+      newNode->sentinalNode = 1;
 }
 
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
@@ -129,12 +133,11 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
     payloaddisplay(rootNode);
     nextNode = rootNode->next;
 
-/*    while(nextNode != nextNode->next)
-    {*/
+    while(nextNode->sentinalNode == 0)
+    {
         payloaddisplay(nextNode);
         nextNode = nextNode->next;
-        payloaddisplay(nextNode);
-/*    }*/
+    }
 
     puts("o\n");
 

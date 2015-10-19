@@ -4,6 +4,6 @@ compiler: gcc
 
 script:
     - make
-    - ./gtkitc
+    - ./gtkitc -sdb
 
 os: linux

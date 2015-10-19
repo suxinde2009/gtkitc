@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <dll.h>
 
-static UINT nodeCount = 0;
-
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -34,8 +32,6 @@ dnode* CreateDNode()
         nde->prev = nde;
         nde->next = nde;
 
-        nodeCount++;
-
         puts("Created DLL node.");
 
         return nde;
@@ -46,36 +42,38 @@ dnode* CreateDNode()
 
 void DestroyDNodeList(dnode* rootNode)
 {
-/*
-     dnode* nextNode[2];
+    dnode* nextNode[2];
 
-      if(rootNode != NULL)
-      {
-            if(rootNode->next == rootNode)
-            {
-                  puts("Deleted single DLL node.");
-                  free(rootNode);
-                  return;
-            }
+    puts("DestroyDNodeList() RETURNING IMMEDIATELY!");
+    return;
 
-            puts("Removing list of DLL nodes.");
+    if(rootNode != NULL)
+    {
+        if(rootNode->next == rootNode)
+        {
+              puts("Deleted single DLL node.");
+              free(rootNode);
+              return;
+        }
 
-            nextNode[0] = rootNode->next;
+        puts("Removing list of DLL nodes.");
 
-            printf("Removing root DLL node [%s]\n", (char *)rootNode->payload);
-            free(rootNode);
+        nextNode[0] = rootNode->next;
 
-            while(1)
-            {
-                  if(FreeDNode(nextNode[0], nextNode[1]))
-                        break;
+        printf("Removing root DLL node [%s]\n", (char *)rootNode->payload);
+        free(rootNode);
 
-                  if(FreeDNode(nextNode[1], nextNode[0]))
-                        break;
-            }
+        while(1)
+        {
+              if(FreeDNode(nextNode[0], nextNode[1]))
+                    break;
 
-      }
-*/
+              if(FreeDNode(nextNode[1], nextNode[0]))
+                    break;
+        }
+
+    }
+
 }
 
 void AppendDNode(dnode* rootNode, dnode* newNode)
@@ -116,46 +114,30 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 {
 
-      /* TODO: Also list in reverse order. */
-/*
-      dnode* nextNode;
+    /* TODO: Also list in reverse order. */
 
-      puts("\nListing DLL nodes (previous node payload in square brackets)...");
+    dnode* nextNode;
 
-      if(!rootNode)
-      {
-            perror("Empty (NULL) dnode list provided.");
-            return;
-      }
+    puts("\nListing DLL nodes (previous node payload in square brackets)...");
 
-      if(rootNode == rootNode->next)
-      {
-            payloaddisplay(rootNode);
-      }
-      else
-      {
+    if(!rootNode)
+    {
+        perror("Empty (NULL) dnode list provided.");
+        return;
+    }
 
-            payloaddisplay(rootNode);
+    payloaddisplay(rootNode);
+    nextNode = rootNode->next;
 
-            nextNode = rootNode->next;
+/*    while(nextNode != nextNode->next)
+    {*/
+        payloaddisplay(nextNode);
+        nextNode = nextNode->next;
+        payloaddisplay(nextNode);
+/*    }*/
 
-            while(1)
-            {
-                  if(nextNode == nextNode->next)
-                  {
-                        payloaddisplay(nextNode);
-                        break;
-                  }
-                  else
-                        payloaddisplay(nextNode);
+    puts("o\n");
 
-                  nextNode = nextNode->next;
-            }
-
-      }
-
-      puts("o\n");
-*/
 }
 
 /* Affine functions. */
@@ -178,12 +160,6 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 {
 	UINT count;
 	dnode* prevMarker, *nextMarker, *currentMarker;
-
-    if(SEQ > nodeCount)
-    {
-        puts("Node sequence beyond upper bound.");
-        return;
-    }
 
     /* Creating new dll because it wasn't initialized in the first place. */
 	if(!*rootNode)

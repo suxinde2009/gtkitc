@@ -9,6 +9,7 @@ typedef struct _DNODE
 	void* payload;
 	struct _DNODE* prev;
 	struct _DNODE* next;
+	int sentinalNode;
 } dnode;
 
 dnode* CreateDNode();

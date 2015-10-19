@@ -24,6 +24,8 @@ int main(int argc, char** argv)
 			case '?':
 				puts("Use options s, d or b.");
 				break;
+			default:
+				break;
 		}
 	}
 

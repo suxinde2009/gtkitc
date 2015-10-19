@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <dll.h>
 
+static UINT nodeCount = 0;
+
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -24,24 +26,27 @@ static int FreeDNode(dnode* cur, dnode* next)
 
 dnode* CreateDNode()
 {
-     dnode* nde = (dnode *) malloc(sizeof(dnode));
+    dnode* nde = (dnode *) malloc(sizeof(dnode));
 
-      if(nde != NULL)
-      {
+    if(nde != NULL)
+    {
+        /* Node points to itself. */
+        nde->prev = nde;
+        nde->next = nde;
 
-          /* Node points to itself. */
-          nde->prev = nde;
-          nde->next = nde;
+        nodeCount++;
 
-          puts("Created DLL node.");
-          return nde;
-      }
-      else
-          return NULL;
+        puts("Created DLL node.");
+
+        return nde;
+    }
+    else
+        return NULL;
 }
 
 void DestroyDNodeList(dnode* rootNode)
 {
+/*
      dnode* nextNode[2];
 
       if(rootNode != NULL)
@@ -70,6 +75,7 @@ void DestroyDNodeList(dnode* rootNode)
             }
 
       }
+*/
 }
 
 void AppendDNode(dnode* rootNode, dnode* newNode)
@@ -111,7 +117,7 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 {
 
       /* TODO: Also list in reverse order. */
-
+/*
       dnode* nextNode;
 
       puts("\nListing DLL nodes (previous node payload in square brackets)...");
@@ -145,10 +151,11 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
                   nextNode = nextNode->next;
             }
+
       }
 
       puts("o\n");
-
+*/
 }
 
 /* Affine functions. */
@@ -171,6 +178,12 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 {
 	UINT count;
 	dnode* prevMarker, *nextMarker, *currentMarker;
+
+    if(SEQ > nodeCount)
+    {
+        puts("Node sequence beyond upper bound.");
+        return;
+    }
 
     /* Creating new dll because it wasn't initialized in the first place. */
 	if(!*rootNode)
@@ -211,13 +224,6 @@ void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 
     for(count = 1; count < SEQ; count++)
     {
-        if(currentMarker == currentMarker->next)
-        {
-            puts("Reached end of list! Not inserting.");
-
-            return;
-        }
-
         /* Advance currentMarker. */
         currentMarker = currentMarker->next;
 

@@ -55,5 +55,7 @@ void dll_test_run()
 
 	ListDNodes(dn, DisplayDNode);
 
-	DestroyDNodeList(dn);
+	DestroyDNodeList((dnode **)&dn);
+
+	ListDNodes(dn, DisplayDNode);
 }

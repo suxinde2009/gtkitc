@@ -13,12 +13,12 @@ typedef struct _DNODE
 } dnode;
 
 dnode* CreateDNode();
-void DestroyDNodeList(dnode* node);
+void DestroyDNodeList(dnode** rootNode);
 void AppendDNode(dnode* rootNode, dnode* newNode);
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *));
 
 /* Affine functions. */
-void DeleteDNode(dnode** rootNode, const UINT sequence);
-void InsertDNode(dnode** rootNode, dnode* newNode, const UINT sequence);
+void DeleteDNode(dnode** rootNode, const UINT SEQ);
+void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ);
 
 #endif

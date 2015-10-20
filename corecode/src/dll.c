@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <dll.h>
 
+/*
 static int FreeDNode(dnode* cur, dnode* next)
 {
 
@@ -21,6 +22,7 @@ static int FreeDNode(dnode* cur, dnode* next)
       return 0;
 
 }
+*/
 
 dnode* CreateDNode()
 {
@@ -42,40 +44,28 @@ dnode* CreateDNode()
         return NULL;
 }
 
-void DestroyDNodeList(dnode* rootNode)
+void DestroyDNodeList(dnode** rootNode)
 {
-    dnode* nextNode[2];
+    dnode* marked, *next;
 
-    puts("DestroyDNodeList() RETURNING IMMEDIATELY!");
-    return;
+	if(!*rootNode)
+	{
+		puts("Node list is empty for DLL. Nothing to delete.");
+		return NULL;
+	}
 
-    if(rootNode != NULL)
+    marked = *rootNode;
+    next = (*rootNode)->next;
+
+    while(marked->sentinalNode == 0)
     {
-        if(rootNode->next == rootNode)
-        {
-              puts("Deleted single DLL node.");
-              free(rootNode);
-              return;
-        }
+        free(marked);
 
-        puts("Removing list of DLL nodes.");
-
-        nextNode[0] = rootNode->next;
-
-        printf("Removing root DLL node [%s]\n", (char *)rootNode->payload);
-        free(rootNode);
-
-        while(1)
-        {
-              if(FreeDNode(nextNode[0], nextNode[1]))
-                    break;
-
-              if(FreeDNode(nextNode[1], nextNode[0]))
-                    break;
-        }
-
+        marked = next;
+        next = marked->next;
     }
 
+    free(marked);
 }
 
 void AppendDNode(dnode* rootNode, dnode* newNode)
@@ -148,18 +138,9 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
 /* Affine functions. */
 
-void DeleteDNode(dnode** rootNode, const UINT sequence)
+void DeleteDNode(dnode** rootNode, const UINT SEQ)
 {
-/*
-	int count = 0;
-	int exceeded = 0;
 
-	if(!*rootNode)
-	{
-		puts("Node list is empty for DLL. Nothing to delete.");
-		return NULL;
-	}
-*/
 }
 
 void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)

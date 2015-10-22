@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <dll.h>
 
+static dnode* lastNode = NULL;
+
 dnode* CreateDNode()
 {
     dnode* nde = (dnode *) malloc(sizeof(dnode));
@@ -37,20 +39,10 @@ void DestroyDNodeList(dnode** rootNode)
     marked = *rootNode;
     next = (*rootNode)->next;
 
-    printf("First node traversed %s [%s]\n", (char *)marked->payload, (char *)marked->prev->payload);
-
-    while(marked->sentinalNode == 0)
-    {
-        marked = next;
-        next = marked->next;
-
-        printf("Current node traversed %s [%s]\n", (char *)marked->payload, (char *)marked->prev->payload);
-    }
-
     puts("Now clearing node list...");
 
     /* Delete in reverse order. */
-    prev = next;
+    prev = lastNode;
 
     while(prev != *rootNode)
     {
@@ -101,6 +93,8 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
       newNode->next = newNode;
       newNode->prev->sentinalNode = 0;
       newNode->sentinalNode = 1;
+
+      lastNode = newNode;
 }
 
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))

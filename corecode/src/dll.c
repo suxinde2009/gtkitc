@@ -46,26 +46,45 @@ dnode* CreateDNode()
 
 void DestroyDNodeList(dnode** rootNode)
 {
-    dnode* marked, *next;
+    dnode* marked, *next, *prev;
+
+    puts("Destroying dnode list.");
 
 	if(!*rootNode)
 	{
 		puts("Node list is empty for DLL. Nothing to delete.");
-		return NULL;
+		return;
 	}
 
     marked = *rootNode;
     next = (*rootNode)->next;
 
+    printf("First node traversed %s [%s]\n", (char *)marked->payload, (char *)marked->prev->payload);
+
     while(marked->sentinalNode == 0)
     {
-        free(marked);
-
         marked = next;
         next = marked->next;
+
+        printf("Current node traversed %s [%s]\n", (char *)marked->payload, (char *)marked->prev->payload);
     }
 
-    free(marked);
+    puts("Now clearing node list...");
+
+    /* Delete in reverse order. */
+    prev = next;
+
+    while(prev != *rootNode)
+    {
+        printf("Targetted node %s [%s]\n", (char *)prev->payload, (char *)prev->prev->payload);
+        prev = prev->prev;
+        free(prev->next);
+        prev->next = NULL;
+    }
+
+    printf("Final node %s [%s]\n", (char *)prev->payload, (char *)prev->prev->payload);
+    free(*rootNode);
+    *rootNode = NULL;
 }
 
 void AppendDNode(dnode* rootNode, dnode* newNode)
@@ -145,62 +164,5 @@ void DeleteDNode(dnode** rootNode, const UINT SEQ)
 
 void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)
 {
-	UINT count;
-	dnode* prevMarker, *nextMarker, *currentMarker;
 
-    puts("InsertDNode() RETURNING IMMEDIATELY!");
-    return;
-
-    /* Creating new dll because it wasn't initialized in the first place. */
-	if(!*rootNode)
-    {
-        puts("Creating new DLL because root node is NULL.");
-
-        *rootNode = newNode;
-        (*rootNode)->next = *rootNode;
-
-		return;
-    }
-
-	printf("Inserting new DLL node at position [%d]\n", SEQ);
-
-    /* If sequence is zero we insert at the start of the list. */
-    if(SEQ == 0)
-    {
-        nextMarker = *rootNode;
-        prevMarker = newNode;
-
-        prevMarker->next = nextMarker;
-        nextMarker->prev = prevMarker;
-        *rootNode = prevMarker;
-
-        return;
-    }
-
-    /* Otherwise we insert somewhere after the beginning. */
-    if(*rootNode == (*rootNode)->next)
-    {
-        puts("There is only one node in list! Cannot insert.");
-
-        return;
-    }
-
-    /* Point to the root. */
-    currentMarker = *rootNode;
-
-    for(count = 1; count < SEQ; count++)
-    {
-        /* Advance currentMarker. */
-        currentMarker = currentMarker->next;
-
-        printf("We are at node [%s]\n", (char *)currentMarker->payload);
-    }
-
-    /* Insert new node. */
-    puts("Inserting new node...");
-    nextMarker = currentMarker->next;
-    currentMarker->next = newNode;
-    newNode->prev = currentMarker;
-    newNode->next = nextMarker;
-    nextMarker->prev = newNode;
 }

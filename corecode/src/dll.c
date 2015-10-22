@@ -2,28 +2,6 @@
 #include <stdlib.h>
 #include <dll.h>
 
-/*
-static int FreeDNode(dnode* cur, dnode* next)
-{
-
-      if(cur == cur->next)
-      {
-            printf("Deleting final DLL node [%s]\n", (char *)cur->payload);
-            free(cur);
-            return 1;
-      }
-      else
-      {
-            printf("Deleting intermediate DLL node [%s]\n", (char *)cur->payload);
-            next = cur->next;
-            free(cur);
-      }
-
-      return 0;
-
-}
-*/
-
 dnode* CreateDNode()
 {
     dnode* nde = (dnode *) malloc(sizeof(dnode));
@@ -136,7 +114,7 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
     if(!rootNode)
     {
-        perror("Empty (NULL) dnode list provided.");
+        perror("Empty dnode list provided.");
         return;
     }
 

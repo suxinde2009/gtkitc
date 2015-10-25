@@ -26,7 +26,7 @@ dnode* CreateDNode()
 
 void DestroyDNodeList(dnode** rootNode)
 {
-    dnode* marked, *next, *prev;
+    dnode* marked = NULL, *next = NULL, *prev = NULL;
 
     puts("Destroying dnode list.");
 
@@ -100,8 +100,6 @@ void AppendDNode(dnode* rootNode, dnode* newNode)
 void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 {
 
-    /* TODO: Also list in reverse order. */
-
     dnode* nextNode;
 
     puts("\nListing DLL nodes (previous node payload in square brackets)...");
@@ -131,7 +129,27 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
 void DeleteDNode(dnode** rootNode, const UINT SEQ)
 {
+    UINT c;
+    dnode* currentNode = *rootNode, *prevNode = NULL, *nextNode = NULL;
 
+    for(c = 0; c < SEQ; c++)
+    {
+        if(currentNode->sentinalNode != 0)
+        {
+            puts("Last node reached. No deletion has taken place.");
+            return;
+        }
+
+        currentNode = currentNode->next;
+    }
+
+    prevNode = currentNode->prev;
+    nextNode = currentNode->next;
+
+    prevNode->next = nextNode;
+    nextNode->prev = prevNode;
+
+    free(currentNode);
 }
 
 void InsertDNode(dnode** rootNode, dnode* newNode, const UINT SEQ)

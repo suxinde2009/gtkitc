@@ -125,8 +125,6 @@ void ListDNodes(dnode* rootNode, void (*payloaddisplay)(dnode *))
 
 }
 
-/* Affine functions. */
-
 void DeleteDNode(dnode** rootNode, const UINT SEQ)
 {
     UINT c;
@@ -134,7 +132,21 @@ void DeleteDNode(dnode** rootNode, const UINT SEQ)
 
     if((*rootNode)->sentinalNode == 1 && SEQ == 0)
     {
+        printf("Deleting sole node: %s [%s]\n", (char *)(*rootNode)->payload, (char *)(*rootNode)->prev->payload);
+
         free(*rootNode);
+        return;
+    }
+    else
+    if(SEQ == 0)
+    {
+        currentNode = *rootNode;
+        printf("Deleting root node: %s [%s]\n", (char *)currentNode->payload, (char *)currentNode->prev->payload);
+
+        *rootNode = (*rootNode)->next;
+        (*rootNode)->prev = *rootNode;
+
+        free(currentNode);
         return;
     }
 

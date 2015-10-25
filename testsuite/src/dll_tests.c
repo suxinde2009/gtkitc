@@ -40,7 +40,7 @@ void dll_test_run()
 	ListDNodes(dn, DisplayDNode);
 
 	puts("Deleting selected DLL node in list.");
-	DeleteDNode((dnode **)&dn, 1);
+	DeleteDNode((dnode **)&dn, 0);
 
 	ListDNodes(dn, DisplayDNode);
 

@@ -132,6 +132,12 @@ void DeleteDNode(dnode** rootNode, const UINT SEQ)
     UINT c;
     dnode* currentNode = *rootNode, *prevNode = NULL, *nextNode = NULL;
 
+    if((*rootNode)->sentinalNode == 1 && SEQ == 0)
+    {
+        free(*rootNode);
+        return;
+    }
+
     for(c = 0; c < SEQ; c++)
     {
         if(currentNode->sentinalNode != 0)
@@ -142,6 +148,8 @@ void DeleteDNode(dnode** rootNode, const UINT SEQ)
 
         currentNode = currentNode->next;
     }
+
+    printf("Deleting node: %s [%s]\n", (char *)currentNode->payload, (char *)currentNode->prev->payload);
 
     prevNode = currentNode->prev;
     nextNode = currentNode->next;
